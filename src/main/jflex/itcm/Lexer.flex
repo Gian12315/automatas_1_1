@@ -23,6 +23,8 @@ numbers = [:digit:]+(\.[:digit:]+)?
 letters = [:jletter:]+
 // TODO: Buscar una mejor manera de realizarlo
 expresion = ({numbers} | {letters})     ((\+|-|\*|\/)      ({numbers} | {letters})+)?
+line_terminator = \r|\n|\r\n
+white_space = {line_terminator} | [ \t\f]
 
 
 // 20 + 4
@@ -50,4 +52,10 @@ expresion = ({numbers} | {letters})     ((\+|-|\*|\/)      ({numbers} | {letters
 
 
 . {System.out.print("?");}
+
+white_space {
+
+    System.out.println("line " + yyline ":voidline");
+
+}
 
