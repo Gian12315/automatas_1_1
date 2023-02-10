@@ -1,4 +1,5 @@
 package itcm;
+import java.util.*;
 
 %%
 
@@ -13,8 +14,10 @@ package itcm;
 %{
     String name;
 %}
-
+numbers = {:jdigit:}+
+letters = {:jletter:}+
 %%
 
+"var " {letters} " = " {numbers} ";" {/* Inserte funcionalidad aquí */}
 "name " [a-zA-Z] + {name = yytext().substring(5);} 
 [Hh] "ello" {System.out.print(yytext() + " " + name + "!");}
