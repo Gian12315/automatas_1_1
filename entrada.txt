@@ -7,3 +7,5 @@ print(c)
 
 
 expresion = [:jletterdigit:]+(\+|-|\*|\/)[:jletterdigit:]+
+  
+

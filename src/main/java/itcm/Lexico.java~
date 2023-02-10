@@ -956,7 +956,7 @@ public class Lexico {
           // fall through
           case 8: break;
           case 2:
-            { /* Espacios y tabulaciones */
+            { 
             }
           // fall through
           case 9: break;
@@ -969,7 +969,7 @@ public class Lexico {
             // lookahead expression with fixed lookahead length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL, zzStartRead, zzEndRead - zzStartRead, zzMarkedPos, -1);
-            { System.out.println("line " + yyline + ": void line");
+            { System.out.println("void, line: " + yyline);
             }
           // fall through
           case 11: break;
@@ -977,7 +977,7 @@ public class Lexico {
             // lookahead expression with fixed lookahead length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL, zzStartRead, zzEndRead - zzStartRead, zzMarkedPos, -2);
-            { System.out.println("line " + yyline + ": void line");
+            { System.out.println("void, line: " + yyline);
             }
           // fall through
           case 12: break;

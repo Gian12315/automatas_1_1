@@ -23,10 +23,6 @@ numbers = [:digit:]+(\.[:digit:]+)?
 letters = [:jletter:]+
 // TODO: Buscar una mejor manera de realizarlo
 expresion = ({numbers} | {letters})     ((\+|-|\*|\/)      ({numbers} | {letters})+)?
-line_terminator = \r|\n|\r\n
-white_space = {line_terminator} | [ \t\f]
-
-
 // 20 + 4
 %%
 
@@ -50,12 +46,11 @@ white_space = {line_terminator} | [ \t\f]
     System.out.println("fun: print - params: " + yytext().substring(par_izq+1, par_der));
 }
 
+[\t\r\f] { /* Espacios y tabulaciones */ }
 
-. {System.out.print("?");}
+^\s+$ { System.out.println("line " + yyline + ": void line"); }
 
-{white_space} {
-
-    System.out.println("line " + yyline + ":voidline");
-
+. {
+    System.out.print("?");
 }
 
