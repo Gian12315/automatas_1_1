@@ -1,11 +1,9 @@
-name Giancarlo
+var a = 20
+var b = 23.3
 
-Hello
+var c = a+b
 
-Fucking world
+print(c)
 
-name Rafa
 
-Hello
-
-MVP??????
+expresion = [:jletterdigit:]+(\+|-|\*|\/)[:jletterdigit:]+

@@ -1,0 +1,21 @@
+line 1: variable
+id: a - value: 20
+
+line 2: variable
+id: b - value: 23.3
+
+line 3: blank
+
+line 4: variable
+id: c - value: a + b
+
+line 4: exp
+op1: a - val1: 20
+op2: b - val2: 23.3
+res: 43.3
+
+line 5: blank
+
+line 6: function
+fun: print - params: c
+

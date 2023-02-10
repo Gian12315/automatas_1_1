@@ -11,13 +11,43 @@ import java.util.*;
 %unicode
 %ignorecase
 
+%init{
+    yyline = 1;
+%init}
+
 %{
     String name;
 %}
-numbers = {:jdigit:}+
-letters = {:jletter:}+
+
+numbers = [:digit:]+(\.[:digit:]+)?
+letters = [:jletter:]+
+// TODO: Buscar una mejor manera de realizarlo
+expresion = ({numbers} | {letters})     ((\+|-|\*|\/)      ({numbers} | {letters})+)?
+
+
+// 20 + 4
 %%
 
-"var " {letters} " = " {numbers} ";" {/* Inserte funcionalidad aquí */}
-"name " [a-zA-Z] + {name = yytext().substring(5);} 
-[Hh] "ello" {System.out.print(yytext() + " " + name + "!");}
+"var " {letters} " = " {expresion} {
+        System.out.println("line: " + yyline + ": variable");
+        String tmp = yytext().trim();
+
+        int first_space = tmp.indexOf(" ");
+        int eq_sign = tmp.indexOf("=");
+        String id_string = tmp.substring(first_space, eq_sign).trim();
+
+        String value_string = tmp.substring(eq_sign+1).trim();
+
+        System.out.println("id: " + id_string + " - value: " + value_string);
+}
+
+"print("{expresion}")" {
+    System.out.println("line " + yyline + ": function");
+    int par_izq = yytext().indexOf("(");
+    int par_der = yytext().indexOf(")");
+    System.out.println("fun: print - params: " + yytext().substring(par_izq+1, par_der));
+}
+
+
+. {System.out.print("?");}
+
