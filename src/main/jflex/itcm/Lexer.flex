@@ -53,9 +53,9 @@ white_space = {line_terminator} | [ \t\f]
 
 . {System.out.print("?");}
 
-white_space {
+{white_space} {
 
-    System.out.println("line " + yyline ":voidline");
+    System.out.println("line " + yyline + ":voidline");
 
 }
 
