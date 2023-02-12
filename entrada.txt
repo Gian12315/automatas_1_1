@@ -1,11 +1,21 @@
-var a = 20
-var b = 23.3
+fun main(string args) -> int {
+    int a = 30;
+    int b = 23.41;
 
-var c = a+b
+    if a > b {
+        print(a**b);
+    }
 
-print(c)
+    for 0..=10 i {
+        print(i)
+    }
 
+    forif a > 30 {
+        a--;
+    }
 
-expresion = [:jletterdigit:]+(\+|-|\*|\/)[:jletterdigit:]+
-  
+    
+    forloco []
+
+}
 

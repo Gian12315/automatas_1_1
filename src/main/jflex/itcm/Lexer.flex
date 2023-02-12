@@ -21,36 +21,86 @@ import java.util.*;
 
 numbers = [:digit:]+(\.[:digit:]+)?
 letters = [:jletter:]+
-// TODO: Buscar una mejor manera de realizarlo
-expresion = ({numbers} | {letters})     ((\+|-|\*|\/)      ({numbers} | {letters})+)?
-// 20 + 4
 %%
 
-"var " {letters} " = " {expresion} {
-        System.out.println("line: " + yyline + ": variable");
-        String tmp = yytext().trim();
+/// Operadores
 
-        int first_space = tmp.indexOf(" ");
-        int eq_sign = tmp.indexOf("=");
-        String id_string = tmp.substring(first_space, eq_sign).trim();
+// Delimitadores
+";" {System.out.print(" del:final_linea");}
+"{" {System.out.print(" del:llave_izquierda");}
+"}" {System.out.print(" del:llave_derecha");}
+"(" {System.out.print(" del:paréntesis_izquierdo");}
+")" {System.out.print(" del:paréntesis_derecho");}
 
-        String value_string = tmp.substring(eq_sign+1).trim();
+// Operadores Aritmeticos
+"*" {System.out.print(" op:multiplicación");}
+"**" {System.out.print(" op:potencia");}
+"+" {System.out.print(" op:suma");}
+"-" {System.out.print(" op:resta");}
+"/" {System.out.print(" op:división");}
+"%" {System.out.print(" op:modulo");}
 
-        System.out.println("id: " + id_string + " - value: " + value_string);
-}
+// Operadores Concatenación
+"..." {System.out.print(" op:concatenación");}
 
-"print("{expresion}")" {
-    System.out.println("line " + yyline + ": function");
-    int par_izq = yytext().indexOf("(");
-    int par_der = yytext().indexOf(")");
-    System.out.println("fun: print - params: " + yytext().substring(par_izq+1, par_der));
-}
+// Operadores Rango
+".." {System.out.print(" op:rango_exclusivo");}
+"..=" {System.out.print(" op:inclusivo");}
 
-[\t\r\f] { /* Espacios y tabulaciones */ }
+// Operadores Incremento
+"++" {System.out.print(" op:incremento");}
+"--" {System.out.print(" op:decremento");}
 
-^\s+$ { System.out.println("line " + yyline + ": void line"); }
+// Operadores Lógicos
+"and" {System.out.print(" op:and");}
+"not" {System.out.print(" op:not");}
+"or" {System.out.print(" op:or");}
 
-. {
-    System.out.print("?");
-}
+// Operadores Relacionales
+"<" {System.out.print(" op:menor");}
+">" {System.out.print(" op:mayor");}
+"<=" {System.out.print(" op:menor_igual");}
+">=" {System.out.print(" op:mayor_igual");}
+"==" {System.out.print(" op:igual");}
+"<>" {System.out.print(" op:diferente");}
+
+// Operadores Generales
+"->" {System.out.print(" op:definición_retorno");}
+"=" {System.out.print(" op:asignación");}
+
+/// Palabras Reservadas
+
+// Tipos de dato
+"int" {System.out.print(" tipo:entero");}
+"double" {System.out.print(" tipo:decimal");}
+"string" {System.out.print(" tipo:cadena");}
+"char" {System.out.print(" tipo:carácter");}
+"bool" {System.out.print(" tipo:booleano");}
+
+// Estructuras de control
+"forif" {System.out.print(" ctl:forif");}
+"for" {System.out.print(" ctl:for");}
+"if" {System.out.print(" ctl:if");}
+
+// Manejo de funciones
+"fun" {System.out.print(" def:función");}
+"return" {System.out.print(" def:retorno");}
+
+// Gestión de librerías
+"import" {System.out.print(" def:importar");}
+
+// I/O
+"input" {System.out.print(" io:entrada");}
+"print" {System.out.print(" io:salida");}
+
+// Comentarios
+
+"//" {System.out.print(" cmnt:comentario");}
+
+" " {System.out.print(" ");}
+
+{numbers} {System.out.print(" var:" + yytext());}
+{letters} {System.out.print(" dig:" + yytext());}
+
+. { System.out.print(" ?"); }
 
