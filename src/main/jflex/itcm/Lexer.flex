@@ -26,81 +26,81 @@ letters = [:jletter:]+
 /// Operadores
 
 // Delimitadores
-";" {System.out.println("del:final_linea");}
-"{" {System.out.println("del:llave_izquierda");}
-"}" {System.out.println("del:llave_derecha");}
-"(" {System.out.println("del:paréntesis_izquierdo");}
-")" {System.out.println("del:paréntesis_derecho");}
+";" {System.out.println(";");}
+"{" {System.out.println("{");}
+"}" {System.out.println("}");}
+"(" {System.out.println("(");}
+")" {System.out.println(")");}
 
 // Operadores Aritmeticos
-"*" {System.out.println("op:multiplicación");}
-"**" {System.out.println("op:potencia");}
-"+" {System.out.println("op:suma");}
-"-" {System.out.println("op:resta");}
-"/" {System.out.println("op:división");}
-"%" {System.out.println("op:modulo");}
+"*" {System.out.println("*");}
+"**" {System.out.println("**");}
+"+" {System.out.println("+");}
+"-" {System.out.println("-");}
+"/" {System.out.println("/");}
+"%" {System.out.println("%");}
 
 // Operadores Concatenación
-"..." {System.out.println("op:concatenación");}
+"..." {System.out.println("...");}
 
 // Operadores Rango
-".." {System.out.println("op:rango_exclusivo");}
-"..=" {System.out.println("op:inclusivo");}
+".." {System.out.println("..");}
+"..=" {System.out.println("..=");}
 
 // Operadores Incremento
-"++" {System.out.println("op:incremento");}
-"--" {System.out.println("op:decremento");}
+"++" {System.out.println("++");}
+"--" {System.out.println("--");}
 
 // Operadores Lógicos
-"and" {System.out.println("op:and");}
-"not" {System.out.println("op:not");}
-"or" {System.out.println("op:or");}
+"and" {System.out.println("and");}
+"not" {System.out.println("not");}
+"or" {System.out.println("or");}
 
 // Operadores Relacionales
-"<" {System.out.println("op:menor");}
-">" {System.out.println("op:mayor");}
-"<=" {System.out.println("op:menor_igual");}
-">=" {System.out.println("op:mayor_igual");}
-"==" {System.out.println("op:igual");}
-"<>" {System.out.println("op:diferente");}
+"<" {System.out.println("<");}
+">" {System.out.println(">");}
+"<=" {System.out.println("<=");}
+">=" {System.out.println(">=");}
+"==" {System.out.println("==");}
+"<>" {System.out.println("<>");}
 
 // Operadores Generales
-"->" {System.out.println("op:definición_retorno");}
-"=" {System.out.println("op:asignación");}
+"->" {System.out.println("->");}
+"=" {System.out.println("=");}
 
 /// Palabras Reservadas
 
 // Tipos de dato
-"int" {System.out.println("tipo:entero");}
-"double" {System.out.println("tipo:decimal");}
-"string" {System.out.println("tipo:cadena");}
-"char" {System.out.println("tipo:carácter");}
-"bool" {System.out.println("tipo:booleano");}
+"int" {System.out.println("int");}
+"double" {System.out.println("double");}
+"string" {System.out.println("string");}
+"char" {System.out.println("char");}
+"bool" {System.out.println("bool");}
 
 // Estructuras de control
-"forif" {System.out.println("ctl:forif");}
-"for" {System.out.println("ctl:for");}
-"if" {System.out.println("ctl:if");}
+"forif" {System.out.println("forif");}
+"for" {System.out.println("for");}
+"if" {System.out.println("if");}
 
 // Manejo de funciones
-"fun" {System.out.println("def:función");}
-"return" {System.out.println("def:retorno");}
+"fun" {System.out.println("fun");}
+"return" {System.out.println("return");}
 
 // Gestión de librerías
-"import" {System.out.println("def:importar");}
+"import" {System.out.println("import");}
 
 // I/O
-"input" {System.out.println("io:entrada");}
-"print" {System.out.println("io:salida");}
+"input" {System.out.println("input");}
+"print" {System.out.println("print");}
 
 // Comentarios
 
-"//" {System.out.println("cmnt:comentario");}
+"//" {System.out.println("//");}
 
 " " {System.out.print("");}
 
-{numbers} {System.out.println("var:" + yytext());}
-{letters} {System.out.println("dig:" + yytext());}
+{numbers} {System.out.println(yytext());}
+{letters} {System.out.println(yytext());}
 
-. { System.out.println("?"); }
+. { System.out.println("{error}"); }
 
