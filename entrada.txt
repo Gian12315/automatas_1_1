@@ -16,6 +16,5 @@ fun main(string args) -> int {
 
     
     forloco []
-
 }
 

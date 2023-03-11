@@ -944,7 +944,7 @@ public class Lexico {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { System.out.print(" ?");
+            { System.out.println("?");
             }
           // fall through
           case 47: break;
@@ -954,222 +954,222 @@ public class Lexico {
           // fall through
           case 48: break;
           case 3:
-            { System.out.print(" ");
+            { System.out.print("");
             }
           // fall through
           case 49: break;
           case 4:
-            { System.out.print(" dig:" + yytext());
+            { System.out.println("dig:" + yytext());
             }
           // fall through
           case 50: break;
           case 5:
-            { System.out.print(" op:modulo");
+            { System.out.println("op:modulo");
             }
           // fall through
           case 51: break;
           case 6:
-            { System.out.print(" del:paréntesis_izquierdo");
+            { System.out.println("del:paréntesis_izquierdo");
             }
           // fall through
           case 52: break;
           case 7:
-            { System.out.print(" del:paréntesis_derecho");
+            { System.out.println("del:paréntesis_derecho");
             }
           // fall through
           case 53: break;
           case 8:
-            { System.out.print(" op:multiplicación");
+            { System.out.println("op:multiplicación");
             }
           // fall through
           case 54: break;
           case 9:
-            { System.out.print(" op:suma");
+            { System.out.println("op:suma");
             }
           // fall through
           case 55: break;
           case 10:
-            { System.out.print(" op:resta");
+            { System.out.println("op:resta");
             }
           // fall through
           case 56: break;
           case 11:
-            { System.out.print(" op:división");
+            { System.out.println("op:división");
             }
           // fall through
           case 57: break;
           case 12:
-            { System.out.print(" var:" + yytext());
+            { System.out.println("var:" + yytext());
             }
           // fall through
           case 58: break;
           case 13:
-            { System.out.print(" del:final_linea");
+            { System.out.println("del:final_linea");
             }
           // fall through
           case 59: break;
           case 14:
-            { System.out.print(" op:menor");
+            { System.out.println("op:menor");
             }
           // fall through
           case 60: break;
           case 15:
-            { System.out.print(" op:asignación");
+            { System.out.println("op:asignación");
             }
           // fall through
           case 61: break;
           case 16:
-            { System.out.print(" op:mayor");
+            { System.out.println("op:mayor");
             }
           // fall through
           case 62: break;
           case 17:
-            { System.out.print(" del:llave_izquierda");
+            { System.out.println("del:llave_izquierda");
             }
           // fall through
           case 63: break;
           case 18:
-            { System.out.print(" del:llave_derecha");
+            { System.out.println("del:llave_derecha");
             }
           // fall through
           case 64: break;
           case 19:
-            { System.out.print(" op:potencia");
+            { System.out.println("op:potencia");
             }
           // fall through
           case 65: break;
           case 20:
-            { System.out.print(" op:incremento");
+            { System.out.println("op:incremento");
             }
           // fall through
           case 66: break;
           case 21:
-            { System.out.print(" op:decremento");
+            { System.out.println("op:decremento");
             }
           // fall through
           case 67: break;
           case 22:
-            { System.out.print(" op:definición_retorno");
+            { System.out.println("op:definición_retorno");
             }
           // fall through
           case 68: break;
           case 23:
-            { System.out.print(" op:rango_exclusivo");
+            { System.out.println("op:rango_exclusivo");
             }
           // fall through
           case 69: break;
           case 24:
-            { System.out.print(" cmnt:comentario");
+            { System.out.println("cmnt:comentario");
             }
           // fall through
           case 70: break;
           case 25:
-            { System.out.print(" op:menor_igual");
+            { System.out.println("op:menor_igual");
             }
           // fall through
           case 71: break;
           case 26:
-            { System.out.print(" op:diferente");
+            { System.out.println("op:diferente");
             }
           // fall through
           case 72: break;
           case 27:
-            { System.out.print(" op:igual");
+            { System.out.println("op:igual");
             }
           // fall through
           case 73: break;
           case 28:
-            { System.out.print(" op:mayor_igual");
+            { System.out.println("op:mayor_igual");
             }
           // fall through
           case 74: break;
           case 29:
-            { System.out.print(" ctl:if");
+            { System.out.println("ctl:if");
             }
           // fall through
           case 75: break;
           case 30:
-            { System.out.print(" op:or");
+            { System.out.println("op:or");
             }
           // fall through
           case 76: break;
           case 31:
-            { System.out.print(" op:concatenación");
+            { System.out.println("op:concatenación");
             }
           // fall through
           case 77: break;
           case 32:
-            { System.out.print(" op:inclusivo");
+            { System.out.println("op:inclusivo");
             }
           // fall through
           case 78: break;
           case 33:
-            { System.out.print(" op:and");
+            { System.out.println("op:and");
             }
           // fall through
           case 79: break;
           case 34:
-            { System.out.print(" ctl:for");
+            { System.out.println("ctl:for");
             }
           // fall through
           case 80: break;
           case 35:
-            { System.out.print(" def:función");
+            { System.out.println("def:función");
             }
           // fall through
           case 81: break;
           case 36:
-            { System.out.print(" tipo:entero");
+            { System.out.println("tipo:entero");
             }
           // fall through
           case 82: break;
           case 37:
-            { System.out.print(" op:not");
+            { System.out.println("op:not");
             }
           // fall through
           case 83: break;
           case 38:
-            { System.out.print(" tipo:booleano");
+            { System.out.println("tipo:booleano");
             }
           // fall through
           case 84: break;
           case 39:
-            { System.out.print(" tipo:carácter");
+            { System.out.println("tipo:carácter");
             }
           // fall through
           case 85: break;
           case 40:
-            { System.out.print(" ctl:forif");
+            { System.out.println("ctl:forif");
             }
           // fall through
           case 86: break;
           case 41:
-            { System.out.print(" io:entrada");
+            { System.out.println("io:entrada");
             }
           // fall through
           case 87: break;
           case 42:
-            { System.out.print(" io:salida");
+            { System.out.println("io:salida");
             }
           // fall through
           case 88: break;
           case 43:
-            { System.out.print(" tipo:decimal");
+            { System.out.println("tipo:decimal");
             }
           // fall through
           case 89: break;
           case 44:
-            { System.out.print(" def:importar");
+            { System.out.println("def:importar");
             }
           // fall through
           case 90: break;
           case 45:
-            { System.out.print(" def:retorno");
+            { System.out.println("def:retorno");
             }
           // fall through
           case 91: break;
           case 46:
-            { System.out.print(" tipo:cadena");
+            { System.out.println("tipo:cadena");
             }
           // fall through
           case 92: break;
