@@ -290,13 +290,13 @@ public class Lexico {
 
   private static final String ZZ_ACTION_PACKED_0 =
     "\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7"+
-    "\1\10\1\11\1\12\1\1\1\13\1\14\1\15\1\16"+
-    "\1\17\1\20\13\4\1\21\1\22\1\23\1\24\1\25"+
-    "\1\26\1\27\1\30\1\0\1\31\1\32\1\33\1\34"+
-    "\6\4\1\35\3\4\1\36\3\4\1\37\1\40\1\14"+
-    "\1\41\3\4\1\42\1\43\2\4\1\44\1\45\3\4"+
-    "\1\46\1\47\10\4\1\50\1\4\1\51\1\52\2\4"+
-    "\1\53\1\54\1\55\1\56";
+    "\1\10\1\11\1\12\1\1\1\13\1\4\1\14\1\15"+
+    "\1\16\1\17\13\4\1\20\1\21\1\22\1\23\1\24"+
+    "\1\25\1\26\1\27\1\0\1\30\1\31\1\32\1\33"+
+    "\6\4\1\34\3\4\1\35\3\4\1\36\1\37\1\4"+
+    "\1\40\3\4\1\41\1\42\2\4\1\43\1\44\3\4"+
+    "\1\45\1\46\10\4\1\47\1\4\1\50\1\51\2\4"+
+    "\1\52\1\53\1\54\1\55";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[92];
@@ -944,235 +944,230 @@ public class Lexico {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { System.out.println("?");
+            { System.out.println("{error}");
             }
           // fall through
-          case 47: break;
+          case 46: break;
           case 2:
             { System.out.print(yytext());
             }
           // fall through
-          case 48: break;
+          case 47: break;
           case 3:
             { System.out.print("");
             }
           // fall through
-          case 49: break;
+          case 48: break;
           case 4:
-            { System.out.println("dig:" + yytext());
+            { System.out.println(yytext());
+            }
+          // fall through
+          case 49: break;
+          case 5:
+            { System.out.println("%");
             }
           // fall through
           case 50: break;
-          case 5:
-            { System.out.println("op:modulo");
+          case 6:
+            { System.out.println("(");
             }
           // fall through
           case 51: break;
-          case 6:
-            { System.out.println("del:paréntesis_izquierdo");
+          case 7:
+            { System.out.println(")");
             }
           // fall through
           case 52: break;
-          case 7:
-            { System.out.println("del:paréntesis_derecho");
+          case 8:
+            { System.out.println("*");
             }
           // fall through
           case 53: break;
-          case 8:
-            { System.out.println("op:multiplicación");
+          case 9:
+            { System.out.println("+");
             }
           // fall through
           case 54: break;
-          case 9:
-            { System.out.println("op:suma");
+          case 10:
+            { System.out.println("-");
             }
           // fall through
           case 55: break;
-          case 10:
-            { System.out.println("op:resta");
+          case 11:
+            { System.out.println("/");
             }
           // fall through
           case 56: break;
-          case 11:
-            { System.out.println("op:división");
+          case 12:
+            { System.out.println(";");
             }
           // fall through
           case 57: break;
-          case 12:
-            { System.out.println("var:" + yytext());
+          case 13:
+            { System.out.println("<");
             }
           // fall through
           case 58: break;
-          case 13:
-            { System.out.println("del:final_linea");
+          case 14:
+            { System.out.println("=");
             }
           // fall through
           case 59: break;
-          case 14:
-            { System.out.println("op:menor");
+          case 15:
+            { System.out.println(">");
             }
           // fall through
           case 60: break;
-          case 15:
-            { System.out.println("op:asignación");
+          case 16:
+            { System.out.println("{");
             }
           // fall through
           case 61: break;
-          case 16:
-            { System.out.println("op:mayor");
+          case 17:
+            { System.out.println("}");
             }
           // fall through
           case 62: break;
-          case 17:
-            { System.out.println("del:llave_izquierda");
+          case 18:
+            { System.out.println("**");
             }
           // fall through
           case 63: break;
-          case 18:
-            { System.out.println("del:llave_derecha");
+          case 19:
+            { System.out.println("++");
             }
           // fall through
           case 64: break;
-          case 19:
-            { System.out.println("op:potencia");
+          case 20:
+            { System.out.println("--");
             }
           // fall through
           case 65: break;
-          case 20:
-            { System.out.println("op:incremento");
+          case 21:
+            { System.out.println("->");
             }
           // fall through
           case 66: break;
-          case 21:
-            { System.out.println("op:decremento");
+          case 22:
+            { System.out.println("..");
             }
           // fall through
           case 67: break;
-          case 22:
-            { System.out.println("op:definición_retorno");
+          case 23:
+            { System.out.println("//");
             }
           // fall through
           case 68: break;
-          case 23:
-            { System.out.println("op:rango_exclusivo");
+          case 24:
+            { System.out.println("<=");
             }
           // fall through
           case 69: break;
-          case 24:
-            { System.out.println("cmnt:comentario");
+          case 25:
+            { System.out.println("<>");
             }
           // fall through
           case 70: break;
-          case 25:
-            { System.out.println("op:menor_igual");
+          case 26:
+            { System.out.println("==");
             }
           // fall through
           case 71: break;
-          case 26:
-            { System.out.println("op:diferente");
+          case 27:
+            { System.out.println(">=");
             }
           // fall through
           case 72: break;
-          case 27:
-            { System.out.println("op:igual");
+          case 28:
+            { System.out.println("if");
             }
           // fall through
           case 73: break;
-          case 28:
-            { System.out.println("op:mayor_igual");
+          case 29:
+            { System.out.println("or");
             }
           // fall through
           case 74: break;
-          case 29:
-            { System.out.println("ctl:if");
+          case 30:
+            { System.out.println("...");
             }
           // fall through
           case 75: break;
-          case 30:
-            { System.out.println("op:or");
+          case 31:
+            { System.out.println("..=");
             }
           // fall through
           case 76: break;
-          case 31:
-            { System.out.println("op:concatenación");
+          case 32:
+            { System.out.println("and");
             }
           // fall through
           case 77: break;
-          case 32:
-            { System.out.println("op:inclusivo");
+          case 33:
+            { System.out.println("for");
             }
           // fall through
           case 78: break;
-          case 33:
-            { System.out.println("op:and");
+          case 34:
+            { System.out.println("fun");
             }
           // fall through
           case 79: break;
-          case 34:
-            { System.out.println("ctl:for");
+          case 35:
+            { System.out.println("int");
             }
           // fall through
           case 80: break;
-          case 35:
-            { System.out.println("def:función");
+          case 36:
+            { System.out.println("not");
             }
           // fall through
           case 81: break;
-          case 36:
-            { System.out.println("tipo:entero");
+          case 37:
+            { System.out.println("bool");
             }
           // fall through
           case 82: break;
-          case 37:
-            { System.out.println("op:not");
+          case 38:
+            { System.out.println("char");
             }
           // fall through
           case 83: break;
-          case 38:
-            { System.out.println("tipo:booleano");
+          case 39:
+            { System.out.println("forif");
             }
           // fall through
           case 84: break;
-          case 39:
-            { System.out.println("tipo:carácter");
+          case 40:
+            { System.out.println("input");
             }
           // fall through
           case 85: break;
-          case 40:
-            { System.out.println("ctl:forif");
+          case 41:
+            { System.out.println("print");
             }
           // fall through
           case 86: break;
-          case 41:
-            { System.out.println("io:entrada");
+          case 42:
+            { System.out.println("double");
             }
           // fall through
           case 87: break;
-          case 42:
-            { System.out.println("io:salida");
+          case 43:
+            { System.out.println("import");
             }
           // fall through
           case 88: break;
-          case 43:
-            { System.out.println("tipo:decimal");
+          case 44:
+            { System.out.println("return");
             }
           // fall through
           case 89: break;
-          case 44:
-            { System.out.println("def:importar");
+          case 45:
+            { System.out.println("string");
             }
           // fall through
           case 90: break;
-          case 45:
-            { System.out.println("def:retorno");
-            }
-          // fall through
-          case 91: break;
-          case 46:
-            { System.out.println("tipo:cadena");
-            }
-          // fall through
-          case 92: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

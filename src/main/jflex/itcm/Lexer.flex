@@ -1,13 +1,13 @@
 package itcm;
-import java.util.*;
+import static itcm.Tokens.*;
 
 %%
 
 %public
-%class Lexico
+%class Lexer
+%type Tokens
 %line
 %column
-%standalone
 %unicode
 %ignorecase
 
@@ -17,16 +17,20 @@ import java.util.*;
 
 %{
     String name;
+    int line;
 %}
 
 numbers = [:digit:]+(\.[:digit:]+)?
-letters = [:jletter:]+
+letters = [:letter:]+
+spaces = [ ,\t,\r\n]+
+
 %%
 
-/// Operadores
+// TODO: Terminar de cambiar el tipo de retorno de cada delimitador
+// Operadores
 
 // Delimitadores
-";" {System.out.println(";");}
+";" {return Delimitador;}
 "{" {System.out.println("{");}
 "}" {System.out.println("}");}
 "(" {System.out.println("(");}
@@ -71,11 +75,11 @@ letters = [:jletter:]+
 /// Palabras Reservadas
 
 // Tipos de dato
-"int" {System.out.println("int");}
-"double" {System.out.println("double");}
-"string" {System.out.println("string");}
-"char" {System.out.println("char");}
-"bool" {System.out.println("bool");}
+"int"|
+"double"|
+"string"|
+"char"|
+"bool" {name=yytext(); line=yyline; return TipoDeDato;}
 
 // Estructuras de control
 "forif" {System.out.println("forif");}
@@ -101,6 +105,5 @@ letters = [:jletter:]+
 
 {numbers} {System.out.println(yytext());}
 {letters} {System.out.println(yytext());}
-
-. { System.out.println("{error}"); }
-
+{spaces} {/* Ignore */}
+. { return ERROR; }
