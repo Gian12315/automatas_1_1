@@ -137,16 +137,25 @@ public class FrmMain extends javax.swing.JFrame {
                 case ERROR:
                     result.append("Symbol not found\n");
                     break;
-                case Identificador:
-                case Numero:
-                case Reservadas:
-                case TipoDeDato:
-                    result.append("Línea: ")
-                          .append(lexer.line)
-                          .append(lexer.name)
-                          .append(": Token - ")
-                          .append(tokens)
-                          .append("\n");
+                    case Identificador: 
+                    case Delimitador: 
+                    case Reservadas:
+                    case TipoDeDato:
+                    result.append("Línea")
+                    .append(lexer.line)
+                    .append(" "+lexer.name+" ")
+                    .append(": Token - ")
+                    .append(tokens)
+                    .append("\n");
+                break;
+                case Operador_relacional: case Operador_aritmetico:case Operador_concatenación:
+                case Operador_general:case Operador_incremento:case Operador_logico:case Operador_rango:
+                    result.append("Línea")
+                    .append(lexer.line)
+                    .append(" "+lexer.name+" ")
+                    .append(": Token - ")
+                    .append(tokens)
+                    .append("\n");  
                     break;
                 default:
                     result.append("Token: ").append(tokens).append("\n");

@@ -17,6 +17,12 @@ public enum Tokens {
     Numero,
     Reservadas,
     TipoDeDato,
-    Operador,
+    Operador_relacional,
+    Operador_aritmetico,
+    Operador_incremento,
+    Operador_logico,
+    Operador_general,
+    Operador_rango,
+    Operador_concatenación,
     ERROR
 }
