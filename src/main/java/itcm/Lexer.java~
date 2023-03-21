@@ -920,92 +920,62 @@ public class Lexer {
             { return ERROR;
             }
           // fall through
-          case 18: break;
+          case 13: break;
           case 2:
             { /* Ignore */
             }
           // fall through
-          case 19: break;
+          case 14: break;
           case 3:
             { System.out.print("");
             }
           // fall through
-          case 20: break;
+          case 15: break;
           case 4:
-            { name=yytext(); line=yyline; return Operador_aritmetico;
+            { name=yytext(); line=yyline; return Operador;
+            }
+          // fall through
+          case 16: break;
+          case 5:
+            { System.out.println(yytext());
+            }
+          // fall through
+          case 17: break;
+          case 6:
+            { return Delimitador;
+            }
+          // fall through
+          case 18: break;
+          case 7:
+            { System.out.println("//");
+            }
+          // fall through
+          case 19: break;
+          case 8:
+            { name=yytext(); line=yyline; return Reservadas;
+            }
+          // fall through
+          case 20: break;
+          case 9:
+            { name=yytext(); line=yyline; return TipoDeDato;
             }
           // fall through
           case 21: break;
-          case 5:
-          {
-            name=yytext(); line=yyline;return Operador_concatenación;
-          }
-          // fall through
-          case 22: break;
-          case 6:
-          {
-            name=yytext(); line=yyline;return Operador_rango;
-          }                        
-          // fall through
-          case 23: break;
-          case 7:
-          {
-            name=yytext(); line=yyline;return Operador_incremento;
-          }                        
-          // fall through
-          case 24: break;
-
-          case 8:
-          {name=yytext(); line=yyline;return Operador_logico;
-          }
-          // fall through
-          case 25: break;
-          case 9:
-          {name=yytext(); line=yyline;return Operador_relacional;
-          }
-          // fall through
-          case 26: break;
           case 10:
-          {name=yytext(); line=yyline;return Operador_general;
-          }
-          // fall through
-          case 27: break;
-          case 11:
-          {name=yytext(); line=yyline;return Operador_general;
-          }
-          // fall through
-          case 28: break;
-          case 12:
-          {name=yytext(); line=yyline;return Delimitador;
-          }
-          // fall through
-          case 29: break;
-          case 13:
-          {name=yytext(); line=yyline;return TipoDeDato;
-          }
-          // fall through
-          case 30: break;
-
-          case 14:
-          {name=yytext(); line=yyline;return Reservadas;
-          }
-          // fall through
-          case 31: break;
-          case 15:
             { System.out.println("input");
             }
           // fall through
-          case 32: break;
-          case 16:
+          case 22: break;
+          case 11:
             { System.out.println("print");
             }
           // fall through
-          case 33: break;
-          case 17:
+          case 23: break;
+          case 12:
             { System.out.println("import");
             }
           // fall through
-          case 34: break;
+          case 24: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

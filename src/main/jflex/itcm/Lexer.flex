@@ -20,7 +20,7 @@ import static itcm.Tokens.*;
     int line;
 %}
 
-numbers = [:digit:]+(\.[:digit:]+)?
+numbers = [:digit:]+(\.[:digit:]+)? 
 letters = [:letter:]+
 spaces = [ ,\t,\r\n]+
 
@@ -30,47 +30,47 @@ spaces = [ ,\t,\r\n]+
 // Operadores
 
 // Delimitadores
-";" {return Delimitador;}
-"{" {System.out.println("{");}
-"}" {System.out.println("}");}
-"(" {System.out.println("(");}
-")" {System.out.println(")");}
+";"|
+"{"| 
+"}"| 
+"("| 
+")"{name=yytext(); line=yyline;return Delimitador;} 
 
 // Operadores Aritmeticos
-"*" {System.out.println("*");}
-"**" {System.out.println("**");}
-"+" {System.out.println("+");}
-"-" {System.out.println("-");}
-"/" {System.out.println("/");}
-"%" {System.out.println("%");}
+"*"| 
+"**"| 
+"+"| 
+"-"| 
+"/"| 
+"%" {name=yytext(); line=yyline;return Operador_aritmetico;}
 
 // Operadores Concatenación
-"..." {System.out.println("...");}
+"..."{name=yytext(); line=yyline;return Operador_concatenación;}
 
 // Operadores Rango
-".." {System.out.println("..");}
-"..=" {System.out.println("..=");}
+".."| 
+"..="{name=yytext(); line=yyline;return Operador_rango;}
 
 // Operadores Incremento
-"++" {System.out.println("++");}
-"--" {System.out.println("--");}
+"++"| 
+"--"{name=yytext(); line=yyline;return Operador_incremento;} 
 
 // Operadores Lógicos
-"and" {System.out.println("and");}
-"not" {System.out.println("not");}
-"or" {System.out.println("or");}
+"and"| 
+"not"| 
+"or"{name=yytext(); line=yyline;return Operador_logico;} 
 
 // Operadores Relacionales
-"<" {System.out.println("<");}
-">" {System.out.println(">");}
-"<=" {System.out.println("<=");}
-">=" {System.out.println(">=");}
-"==" {System.out.println("==");}
-"<>" {System.out.println("<>");}
+"<"| 
+">"| 
+"<="| 
+">="| 
+"=="| 
+"<>"{name=yytext(); line=yyline;return Operador_relacional;} 
 
 // Operadores Generales
-"->" {System.out.println("->");}
-"=" {System.out.println("=");}
+"->"| 
+"=" {name=yytext(); line=yyline; return Operador_general;}
 
 /// Palabras Reservadas
 
@@ -82,26 +82,31 @@ spaces = [ ,\t,\r\n]+
 "bool" {name=yytext(); line=yyline; return TipoDeDato;}
 
 // Estructuras de control
-"forif" {System.out.println("forif");}
-"for" {System.out.println("for");}
-"if" {System.out.println("if");}
+"forif"| 
+"for"|
+"if"|
 
 // Manejo de funciones
-"fun" {System.out.println("fun");}
-"return" {System.out.println("return");}
+"fun"|
+"return"| 
 
 // Gestión de librerías
-"import" {System.out.println("import");}
+"import"|
 
 // I/O
-"input" {System.out.println("input");}
-"print" {System.out.println("print");}
+"input"|
+"print"{name=yytext(); line=yyline; return Reservadas;}
 
 // Comentarios
 
 "//" {System.out.println("//");}
 
 " " {System.out.print("");}
+
+//Identificadores
+{L}{L}{D}*{name=yytext();line=yyline;return Identificador;}
+//Numeros
+("(-"{D}+")")|{D}+{name=yytext();line=yyline;return Numero;}
 
 {numbers} {System.out.println(yytext());}
 {letters} {System.out.println(yytext());}
