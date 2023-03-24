@@ -24,5 +24,9 @@ public enum Tokens {
     Operador_general,
     Operador_rango,
     Operador_concatenación,
-    ERROR
+    Estructuras_control,
+    Funciones,
+    Libreria,
+    Entradas_Salidas,
+    ERROR;
 }
