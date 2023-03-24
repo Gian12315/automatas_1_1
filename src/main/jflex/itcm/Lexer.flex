@@ -103,11 +103,6 @@ spaces = [ ,\t,\r\n]+
 
 " " {System.out.print("");}
 
-//Identificadores
-{L}{L}{D}*{name=yytext();line=yyline;return Identificador;}
-//Numeros
-("(-"{D}+")")|{D}+{name=yytext();line=yyline;return Numero;}
-
 {numbers} {System.out.println(yytext());}
 {letters} {System.out.println(yytext());}
 {spaces} {/* Ignore */}
