@@ -84,29 +84,24 @@ spaces = [ ,\t,\r\n]+
 // Estructuras de control
 "forif"| 
 "for"|
-"if"|
+"if"{name=yytext(); line=yyline; return Estructuras_control;}
 
 // Manejo de funciones
 "fun"|
-"return"| 
+"return"{name=yytext(); line=yyline; return Funciones;}
 
 // Gestión de librerías
-"import"|
+"import"{name=yytext(); line=yyline; return Librerias;}
 
 // I/O
 "input"|
-"print"{name=yytext(); line=yyline; return Reservadas;}
+"print"{name=yytext(); line=yyline; return Entradas_Salidas;}
 
 // Comentarios
 
 "//" {System.out.println("//");}
 
 " " {System.out.print("");}
-
-//Identificadores
-{L}{L}{D}*{name=yytext();line=yyline;return Identificador;}
-//Numeros
-("(-"{D}+")")|{D}+{name=yytext();line=yyline;return Numero;}
 
 {numbers} {System.out.println(yytext());}
 {letters} {System.out.println(yytext());}
