@@ -23,6 +23,7 @@ import static itcm.Tokens.*;
 numbers = [:digit:]+(\.[:digit:]+)? 
 letters = [:letter:]+
 spaces = [ ,\t,\r\n]+
+text = \".+\"
 
 %%
 
@@ -34,7 +35,7 @@ spaces = [ ,\t,\r\n]+
 "{"| 
 "}"| 
 "("| 
-")"{name=yytext(); line=yyline;return Delimitador;} 
+")" {name=yytext(); line=yyline;return Delimitador;}
 
 // Operadores Aritmeticos
 "*"| 
@@ -45,20 +46,20 @@ spaces = [ ,\t,\r\n]+
 "%" {name=yytext(); line=yyline;return Operador_aritmetico;}
 
 // Operadores Concatenación
-"..."{name=yytext(); line=yyline;return Operador_concatenación;}
+"..." {name=yytext(); line=yyline;return Operador_concatenacion;}
 
 // Operadores Rango
 ".."| 
-"..="{name=yytext(); line=yyline;return Operador_rango;}
+"..=" {name=yytext(); line=yyline;return Operador_rango;}
 
 // Operadores Incremento
 "++"| 
-"--"{name=yytext(); line=yyline;return Operador_incremento;} 
+"--" {name=yytext(); line=yyline;return Operador_incremento;}
 
 // Operadores Lógicos
 "and"| 
 "not"| 
-"or"{name=yytext(); line=yyline;return Operador_logico;} 
+"or" {name=yytext(); line=yyline;return Operador_logico;}
 
 // Operadores Relacionales
 "<"| 
@@ -66,7 +67,7 @@ spaces = [ ,\t,\r\n]+
 "<="| 
 ">="| 
 "=="| 
-"<>"{name=yytext(); line=yyline;return Operador_relacional;} 
+"<>" {name=yytext(); line=yyline;return Operador_relacional;}
 
 // Operadores Generales
 "->"| 
@@ -84,18 +85,18 @@ spaces = [ ,\t,\r\n]+
 // Estructuras de control
 "forif"| 
 "for"|
-"if"{name=yytext(); line=yyline; return Estructuras_control;}
+"if" {name=yytext(); line=yyline; return Estructuras_control;}
 
 // Manejo de funciones
 "fun"|
-"return"{name=yytext(); line=yyline; return Funciones;}
+"return" {name=yytext(); line=yyline; return Funciones;}
 
 // Gestión de librerías
-"import"{name=yytext(); line=yyline; return Librerias;}
+"import" {name=yytext(); line=yyline; return Libreria;}
 
 // I/O
 "input"|
-"print"{name=yytext(); line=yyline; return Entradas_Salidas;}
+"print" {name=yytext(); line=yyline; return Entradas_Salidas;}
 
 // Comentarios
 
@@ -103,7 +104,9 @@ spaces = [ ,\t,\r\n]+
 
 " " {System.out.print("");}
 
-{numbers} {System.out.println(yytext());}
-{letters} {System.out.println(yytext());}
+{numbers} {/* Ignore */}
+{letters} {/* Ignore */}
 {spaces} {/* Ignore */}
-. { return ERROR; }
+{text} {/* Ignore */}
+
+. { name=yytext(); line=yyline; return ERROR; }

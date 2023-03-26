@@ -38,20 +38,15 @@ public class FrmMain extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         txtInput = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtResult = new javax.swing.JTextArea();
         btnAnalyze = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtResult = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         txtInput.setColumns(20);
         txtInput.setRows(5);
         jScrollPane1.setViewportView(txtInput);
-
-        txtResult.setEditable(false);
-        txtResult.setColumns(20);
-        txtResult.setRows(5);
-        jScrollPane2.setViewportView(txtResult);
 
         btnAnalyze.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btnAnalyze.setText("Analizar");
@@ -60,6 +55,10 @@ public class FrmMain extends javax.swing.JFrame {
                 btnAnalyzeActionPerformed(evt);
             }
         });
+
+        txtResult.setEditable(false);
+        txtResult.setContentType("text/html"); // NOI18N
+        jScrollPane3.setViewportView(txtResult);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,21 +69,20 @@ public class FrmMain extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAnalyze, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAnalyze, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                .addComponent(btnAnalyze, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -96,19 +94,19 @@ public class FrmMain extends javax.swing.JFrame {
         // el usuario por la interfaz de usuario)
         // No es posible darle directamente el texto a la clase Lexer.java
         final String ARCHIVE_NAME = "input.txt";
-        writeFile(ARCHIVE_NAME);
+        writeFile();
         try {
-            readFile(ARCHIVE_NAME);
+            readFile();
         } catch (IOException ex) {
             Logger.getLogger(FrmMain.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnAnalyzeActionPerformed
 
-    private void writeFile(String archive){
+    private void writeFile(){
         PrintWriter writer;
         try{
-            writer = new PrintWriter(archive);
+            writer = new PrintWriter("input.txt");
             writer.print(txtInput.getText());
             writer.close();
         }catch(FileNotFoundException e){
@@ -116,11 +114,12 @@ public class FrmMain extends javax.swing.JFrame {
         }
     }
 
-    private void readFile(String archiveName) throws IOException{
+    private void readFile() throws IOException{
         
-        Reader reader = new BufferedReader(new FileReader(archiveName));
+        Reader reader = new BufferedReader(new FileReader("input.txt"));
         Lexer lexer = new Lexer(reader);
         StringBuilder result = new StringBuilder();
+        int actualLine  = 0; // Linea anterior
 
         // Este ciclo infinito analiza el fichero de input que se le pasa a clase Lexer.java
         // Concatena al text area de del JPanel lo que va identificando
@@ -128,40 +127,34 @@ public class FrmMain extends javax.swing.JFrame {
         while(true){
             Tokens tokens = lexer.yylex();
             if(tokens == null){
-                result.append("END");
+                result.append("<p><strong>END</strong></p>");
                 txtResult.setText(result.toString());
                 return;
             }
-                
-            switch(tokens){
-                case ERROR:
-                    result.append("Symbol not found\n");
-                    break;
-                    case Identificador: 
-                    case Delimitador: 
-                    case Reservadas:
-                    case TipoDeDato:
-                    result.append("Línea")
-                    .append(lexer.line)
-                    .append(" "+lexer.name+" ")
-                    .append(": Token - ")
-                    .append(tokens)
-                    .append("\n");
-                break;
-                case Operador_relacional: case Operador_aritmetico:case Operador_concatenación:
-                case Operador_general:case Operador_incremento:case Operador_logico:case Operador_rango:
-                    result.append("Línea")
-                    .append(lexer.line)
-                    .append(" "+lexer.name+" ")
-                    .append(": Token - ")
-                    .append(tokens)
-                    .append("\n");  
-                    break;
-                default:
-                    result.append("Token: ").append(tokens).append("\n");
-                    break;
-                }
+
+            if(lexer.line != actualLine){
+                if(lexer.line != 1) result.append("<p></p>");
+                result. append("<h2>Linea ").
+                        append(lexer.line).
+                        append("</h2>").
+                        append("\n");
             }
+
+            if (tokens == Tokens.ERROR) {
+                result. append("<p><span color='red'>").
+                        append(lexer.name).
+                        append("</span> - ").
+                        append("Symbol not found</p>");
+            } else {
+                result. append("<p><span color='blue'>").
+                        append(lexer.name).
+                        append("</span>").
+                        append(" - ").
+                        append(tokens).
+                        append(" \n");
+            }
+            actualLine = lexer.line;
+        }
     }
     /**
      * @param args the command line arguments
@@ -201,8 +194,8 @@ public class FrmMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnalyze;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea txtInput;
-    private javax.swing.JTextArea txtResult;
+    private javax.swing.JTextPane txtResult;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,7 +15,6 @@ public enum Tokens {
     Reservada,
     Identificador,
     Numero,
-    Reservadas,
     TipoDeDato,
     Operador_relacional,
     Operador_aritmetico,
@@ -23,10 +22,11 @@ public enum Tokens {
     Operador_logico,
     Operador_general,
     Operador_rango,
-    Operador_concatenación,
+    Operador_concatenacion,
     Estructuras_control,
     Funciones,
     Libreria,
     Entradas_Salidas,
+    Comillas,
     ERROR;
 }
