@@ -1,13 +1,13 @@
 package itcm;
-import java.util.*;
+import static itcm.Tokens.*;
 
 %%
 
 %public
-%class Lexico
+%class Lexer
+%type Tokens
 %line
 %column
-%standalone
 %unicode
 %ignorecase
 
@@ -17,81 +17,86 @@ import java.util.*;
 
 %{
     String name;
+    int line;
 %}
 
-numbers = [:digit:]+(\.[:digit:]+)?
-letters = [:jletter:]+
+numbers = [:digit:]+(\.[:digit:]+)? 
+letters = [:letter:]+
+spaces = [ ,\t,\r\n]+
+text = \".+\"
+
 %%
 
-/// Operadores
+// TODO: Terminar de cambiar el tipo de retorno de cada delimitador
+// Operadores
 
 // Delimitadores
-";" {System.out.println(";");}
-"{" {System.out.println("{");}
-"}" {System.out.println("}");}
-"(" {System.out.println("(");}
-")" {System.out.println(")");}
+";"|
+"{"| 
+"}"| 
+"("| 
+")" {name=yytext(); line=yyline;return Delimitador;}
 
 // Operadores Aritmeticos
-"*" {System.out.println("*");}
-"**" {System.out.println("**");}
-"+" {System.out.println("+");}
-"-" {System.out.println("-");}
-"/" {System.out.println("/");}
-"%" {System.out.println("%");}
+"*"| 
+"**"| 
+"+"| 
+"-"| 
+"/"| 
+"%" {name=yytext(); line=yyline;return Operador_aritmetico;}
 
 // Operadores Concatenación
-"..." {System.out.println("...");}
+"..." {name=yytext(); line=yyline;return Operador_concatenacion;}
 
 // Operadores Rango
-".." {System.out.println("..");}
-"..=" {System.out.println("..=");}
+".."| 
+"..=" {name=yytext(); line=yyline;return Operador_rango;}
 
 // Operadores Incremento
-"++" {System.out.println("++");}
-"--" {System.out.println("--");}
+"++"| 
+"--" {name=yytext(); line=yyline;return Operador_incremento;}
 
 // Operadores Lógicos
-"and" {System.out.println("and");}
-"not" {System.out.println("not");}
-"or" {System.out.println("or");}
+"and"| 
+"not"| 
+"or" {name=yytext(); line=yyline;return Operador_logico;}
 
 // Operadores Relacionales
-"<" {System.out.println("<");}
-">" {System.out.println(">");}
-"<=" {System.out.println("<=");}
-">=" {System.out.println(">=");}
-"==" {System.out.println("==");}
-"<>" {System.out.println("<>");}
+"<"| 
+">"| 
+"<="| 
+">="| 
+"=="| 
+"<>" {name=yytext(); line=yyline;return Operador_relacional;}
 
 // Operadores Generales
-"->" {System.out.println("->");}
-"=" {System.out.println("=");}
+"->"| 
+"=" {name=yytext(); line=yyline; return Operador_general;}
 
 /// Palabras Reservadas
 
 // Tipos de dato
-"int" {System.out.println("int");}
-"double" {System.out.println("double");}
-"string" {System.out.println("string");}
-"char" {System.out.println("char");}
-"bool" {System.out.println("bool");}
+"int"|
+"double"|
+"string"|
+"char"|
+"bool" {name=yytext(); line=yyline; return TipoDeDato;}
 
 // Estructuras de control
-"forif" {System.out.println("forif");}
-"for" {System.out.println("for");}
-"if" {System.out.println("if");}
+"forif"| 
+"for"|
+"if" {name=yytext(); line=yyline; return Estructuras_control;}
 
 // Manejo de funciones
-"fun" {System.out.println("fun");}
-"return" {System.out.println("return");}
+"fun"|
+"return" {name=yytext(); line=yyline; return Funciones;}
 
 // Gestión de librerías
-"import" {System.out.println("import");}
+"import" {name=yytext(); line=yyline; return Libreria;}
 
 // I/O
-"input" {System.out.println("input");}
-"print" {System.out.println("print");}
+"input"|
+"print" {name=yytext(); line=yyline; return Entradas_Salidas;}
 
 // Comentarios
 
@@ -99,8 +104,9 @@ letters = [:jletter:]+
 
 " " {System.out.print("");}
 
-{numbers} {System.out.println(yytext());}
-{letters} {System.out.println(yytext());}
+{numbers} {/* Ignore */}
+{letters} {/* Ignore */}
+{spaces} {/* Ignore */}
+{text} {/* Ignore */}
 
-. { System.out.println("{error}"); }
-
+. { name=yytext(); line=yyline; return ERROR; }
