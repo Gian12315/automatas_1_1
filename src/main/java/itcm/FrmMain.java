@@ -119,11 +119,10 @@ public class FrmMain extends javax.swing.JFrame {
         Reader reader = new BufferedReader(new FileReader("input.txt"));
         Lexer lexer = new Lexer(reader);
         StringBuilder result = new StringBuilder();
-        int actualLine  = 0; // Linea anterior
+        int previousLine  = 0; 
 
         // Este ciclo infinito analiza el fichero de input que se le pasa a clase Lexer.java
         // Concatena al text area de del JPanel lo que va identificando
-        // TODO: Terminar de agregar los casos del switch case
         while(true){
             Tokens tokens = lexer.yylex();
             if(tokens == null){
@@ -132,7 +131,7 @@ public class FrmMain extends javax.swing.JFrame {
                 return;
             }
 
-            if(lexer.line != actualLine){
+            if(lexer.line != previousLine){
                 if(lexer.line != 1) result.append("<p></p>");
                 result. append("<h2>Linea ").
                         append(lexer.line).
@@ -153,7 +152,7 @@ public class FrmMain extends javax.swing.JFrame {
                         append(tokens).
                         append(" \n");
             }
-            actualLine = lexer.line;
+            previousLine = lexer.line;
         }
     }
     /**
