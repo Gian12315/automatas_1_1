@@ -104,9 +104,13 @@ text = \".+\"
 
 " " {System.out.print("");}
 
-{numbers} {/* Ignore */}
-{letters} {/* Ignore */}
-{spaces} {/* Ignore */}
-{text} {/* Ignore */}
 
-. { name=yytext(); line=yyline; return ERROR; }
+{numbers}"."{numbers} {name=yytext(); line=yyline; return Decimal; }
+{numbers} {name=yytext(); line=yyline; return Numero; }
+{letters} {name=yytext(); line=yyline; return Identificador;}
+
+{spaces} {/* Ignore */}
+
+{text} {name=yytext(); line=yyline; return Texto;}
+
+. {name=yytext(); line=yyline; return ERROR; }
