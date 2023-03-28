@@ -15,6 +15,7 @@ public enum Tokens {
     Reservada,
     Identificador,
     Numero,
+    Decimal,
     TipoDeDato,
     Operador_relacional,
     Operador_aritmetico,
@@ -27,6 +28,7 @@ public enum Tokens {
     Funciones,
     Libreria,
     Entradas_Salidas,
-    Comillas,
+    Texto,
+    Arroba,
     ERROR;
 }

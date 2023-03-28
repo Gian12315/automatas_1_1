@@ -85,6 +85,7 @@ text = \".+\"
 // Estructuras de control
 "forif"| 
 "for"|
+"while"|
 "if" {name=yytext(); line=yyline; return Estructuras_control;}
 
 // Manejo de funciones
@@ -98,15 +99,19 @@ text = \".+\"
 "input"|
 "print" {name=yytext(); line=yyline; return Entradas_Salidas;}
 
+"@" {name=yytext(); line=yyline; return Arroba;}
 // Comentarios
 
 "//" {System.out.println("//");}
 
 " " {System.out.print("");}
 
-{numbers} {/* Ignore */}
-{letters} {/* Ignore */}
-{spaces} {/* Ignore */}
-{text} {/* Ignore */}
 
-. { name=yytext(); line=yyline; return ERROR; }
+
+{numbers}"."{numbers} {name=yytext(); line=yyline; return Decimal; }
+{numbers} {name=yytext(); line=yyline; return Numero; }
+{letters} {name=yytext(); line=yyline; return Identificador;}
+{spaces} {/* Ignore */}
+{text} {name=yytext(); line=yyline; return Texto;}
+
+. {name=yytext(); line=yyline; return ERROR;}
