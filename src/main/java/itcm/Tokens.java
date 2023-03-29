@@ -26,6 +26,8 @@ public enum Tokens {
     Estructuras_control,
     Funciones,
     Libreria,
+    Texto,
+    Decimal,
     Entradas_Salidas,
     Comillas,
     ERROR;
