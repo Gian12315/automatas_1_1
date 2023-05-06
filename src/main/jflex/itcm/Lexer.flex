@@ -10,6 +10,7 @@ import static itcm.Tokens.*;
 %column
 %unicode
 %ignorecase
+%cup
 
 %init{
     yyline = 1;
@@ -35,7 +36,7 @@ text = \".+\"
 "{"| 
 "}"| 
 "("| 
-")" {name=yytext(); line=yyline;return Delimitador;}
+")" {return new Symbol(syn.DELIMITADOR, yyline, yycolumn, yytext());}
 
 // Operadores Aritmeticos
 "*"| 
@@ -43,23 +44,23 @@ text = \".+\"
 "+"| 
 "-"| 
 "/"| 
-"%" {name=yytext(); line=yyline;return Operador_aritmetico;}
+"%" {return new Symbol(syn.OPERADOR_ARITMETICO, yyline, yycolumn, yytext());}
 
 // Operadores Concatenación
-"..." {name=yytext(); line=yyline;return Operador_concatenacion;}
+"..." {return new Symbol(syn.OPERADOR_CONCATENACION, yyline, yycolumn, yytext());}
 
 // Operadores Rango
 ".."| 
-"..=" {name=yytext(); line=yyline;return Operador_rango;}
+"..=" {return new Symbol(syn.OPERADOR_RANGO, yyline, yycolumn, yytext());}
 
 // Operadores Incremento
 "++"| 
-"--" {name=yytext(); line=yyline;return Operador_incremento;}
+"--" {return new Symbol(syn.OPERADOR_INCREMENTO, yyline, yycolumn, yytext());}
 
 // Operadores Lógicos
 "and"| 
 "not"| 
-"or" {name=yytext(); line=yyline;return Operador_logico;}
+"or" {return new Symbol(syn.OPERADOR_LOGICO, yyline, yycolumn, yytext());}
 
 // Operadores Relacionales
 "<"| 
@@ -67,11 +68,11 @@ text = \".+\"
 "<="| 
 ">="| 
 "=="| 
-"<>" {name=yytext(); line=yyline;return Operador_relacional;}
+"<>" {return new Symbol(syn.OPERADOR_RELACIONAL, yyline, yycolumn, yytext());}
 
 // Operadores Generales
 "->"| 
-"=" {name=yytext(); line=yyline; return Operador_general;}
+"=" {return new Symbol(syn.OPERADOR_GENERAL, yyline, yycolumn, yytext());}
 
 /// Palabras Reservadas
 
@@ -80,23 +81,23 @@ text = \".+\"
 "double"|
 "string"|
 "char"|
-"bool" {name=yytext(); line=yyline; return TipoDeDato;}
+"bool" {return new Symbol(syn.TIPODEDATO, yyline, yycolumn, yytext());}
 
 // Estructuras de control
 "forif"| 
 "for"|
-"if" {name=yytext(); line=yyline; return Estructuras_control;}
+"if" {return new Symbol(syn.ESTRUCTURAS_CONTROL, yyline, yycolumn, yytext());}
 
 // Manejo de funciones
 "fun"|
-"return" {name=yytext(); line=yyline; return Funciones;}
+"return" {return new Symbol(syn.FUNCIONES, yyline, yycolumn, yytext());}
 
 // Gestión de librerías
-"import" {name=yytext(); line=yyline; return Libreria;}
+"import" {return new Symbol(syn.LIBRERIA, yyline, yycolumn, yytext());}
 
 // I/O
 "input"|
-"print" {name=yytext(); line=yyline; return Entradas_Salidas;}
+"print" {return new Symbol(syn.ENTRADAS_SALIDAS, yyline, yycolumn, yytext());}
 
 // Comentarios
 
@@ -105,12 +106,12 @@ text = \".+\"
 " " {System.out.print("");}
 
 
-{numbers}"."{numbers} {name=yytext(); line=yyline; return Decimal; }
-{numbers} {name=yytext(); line=yyline; return Numero; }
-{letters} {name=yytext(); line=yyline; return Identificador;}
+{numbers}"."{return new Symbol(syn.DECIMAL, yyline, yycolumn, yytext());} {name=yytext(); line=yyline; return ; }
+{numbers} {return new Symbol(syn.NUMERO, yyline, yycolumn, yytext());}
+{letters} {return new Symbol(syn.IDENTIFICADOR, yyline, yycolumn, yytext());}
 
 {spaces} {/* Ignore */}
 
-{text} {name=yytext(); line=yyline; return Texto;}
+{text} {return new Symbol(syn.TEXTO, yyline, yycolumn, yytext());}
 
-. {name=yytext(); line=yyline; return ERROR; }
+. {return new Symbol(syn.ERROR, yyline, yycolumn, yytext());}
