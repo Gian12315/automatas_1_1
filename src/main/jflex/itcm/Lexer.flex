@@ -106,7 +106,7 @@ text = \".+\"
 " " {System.out.print("");}
 
 
-{numbers}"."{return new Symbol(syn.DECIMAL, yyline, yycolumn, yytext());} {name=yytext(); line=yyline; return ; }
+{numbers}"."{return new Symbol(syn.DECIMAL, yyline, yycolumn, yytext());}
 {numbers} {return new Symbol(syn.NUMERO, yyline, yycolumn, yytext());}
 {letters} {return new Symbol(syn.IDENTIFICADOR, yyline, yycolumn, yytext());}
 

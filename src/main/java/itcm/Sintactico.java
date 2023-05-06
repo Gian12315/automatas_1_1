@@ -40,7 +40,7 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
     "\000\006\000\002\001\002\000\004\002\010\001\002\000" +
-    "\004\006\006\001\002\000\002\001\002\000\004\002\000" +
+    "\004\012\006\001\002\000\002\001\002\000\004\002\000" +
     "\001\002\000\004\002\001\001\002" });
 
   /** Access to parse-action table. */
@@ -128,7 +128,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 1: // EXPR_BOOL ::= ID_NUM OPER_RELACIONAL ID_NUM 
+          case 1: // EXPR_BOOL ::= ID_NUM OPERADOR_RELACIONAL ID_NUM 
             {
               Object RESULT =null;
 

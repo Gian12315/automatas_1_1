@@ -6,10 +6,24 @@ import java_cup.runtime.*;
 scan with {: return scanner.next_token(); :};*/
 
 // Terminales
-terminal            TIPO_DE_DATO;
-terminal            ID;
-terminal            OPER_RELACIONAL;
-terminal
+terminal DELIMITADOR;
+terminal OPERADOR_ARITMETICO;
+terminal OPERADOR_CONCATENACION;
+terminal OPERADOR_RANGO;
+terminal OPERADOR_INCREMENTO;
+terminal OPERADOR_LOGICO;
+terminal OPERADOR_RELACIONAL;
+terminal OPERADOR_GENERAL;
+terminal TIPODEDATO;
+terminal ESTRUCTURAS_CONTROL;
+terminal FUNCIONES;
+terminal LIBRERIA;
+terminal ENTRADAS_SALIDAS;
+terminal DECIMAL;
+terminal NUMERO;
+terminal IDENTIFICADOR;
+terminal TEXTO;
+terminal ERROR;
 
 // No terminales
 non terminal DECLA;
@@ -24,4 +38,4 @@ non terminal EXPR_BOOL;
 // Gramaticas ó Reglas de producción
 start with EXPR_BOOL; // Cambiar esto luego
 
-EXPR_BOOL ::= ID_NUM OPER_RELACIONAL ID_NUM;
+EXPR_BOOL ::= ID_NUM OPERADOR_RELACIONAL ID_NUM;
