@@ -25,6 +25,13 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>com.github.vbmacher</groupId>
+      <artifactId>cup-maven-plugin</artifactId>
+      <version>11b-20160615-2</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -48,25 +55,25 @@
           </execution>
         </executions>
       </plugin>
+    <plugin>
+      <groupId>com.github.vbmacher</groupId>
+      <artifactId>cup-maven-plugin</artifactId>
+      <version>11b-20160615-2</version>
+      <executions>
+        <execution>
+          <goals>
+            <goal>generate</goal>
+          </goals>
+        </execution>
+      </executions>
+      <configuration>
+        <cupDefinition>src/main/jflex/itcm</cupDefinition>
+        <outputDirectory>src/main/java</outputDirectory>
+        <className>Sintactico</className>
+        <symbolsName>syn</symbolsName>
+      </configuration>
+    </plugin>
 
-<!-- <plugin> -->
-<!--   <groupId>com.github.vbmacher</groupId> -->
-<!--   <artifactId>cup-maven-plugin</artifactId> -->
-<!--   <version>11b-20160615-2</version> -->
-<!--   <executions> -->
-<!--     <execution> -->
-<!--       <goals> -->
-<!--         <goal>generate</goal> -->
-<!--       </goals> -->
-<!--     </execution> -->
-<!--   </executions> -->
-<!--   <configuration> -->
-<!-- 	  <cupDefinition>src/main/jflex/itcm/Sintactico</cupDefinition> -->
-<!-- 	  <outputDirectory>src/main/java</outputDirectory> -->
-<!--     <className>Sintactico</className> -->
-<!--     <symbolsName>syn</symbolsName> -->
-<!--   </configuration> -->
-<!-- </plugin> -->
 
 </plugins>
   </build>

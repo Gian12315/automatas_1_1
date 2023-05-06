@@ -50,7 +50,7 @@ text = \".+\"
 "..." {return new Symbol(syn.CONCAT, yyline, yycolumn, yytext());}
 
 // Operadores Rango
-".." return new Symbol(syn.EX_RANGO, yyline, yycolumn, yytext());
+".." {return new Symbol(syn.EX_RANGO, yyline, yycolumn, yytext())};
 "..=" {return new Symbol(syn.IN_RANGO, yyline, yycolumn, yytext());}
 
 // Operadores Incremento
@@ -106,7 +106,7 @@ text = \".+\"
 " " {System.out.print("");}
 
 
-{numbers}"."{numbers} {return new Symbol(syn.DECIMAL, yyline, yycolumn, yytext());}
+{numbers}"."{return new Symbol(syn.DECIMAL, yyline, yycolumn, yytext());}
 {numbers} {return new Symbol(syn.NUMERO, yyline, yycolumn, yytext());}
 {letters} {return new Symbol(syn.IDENTIFICADOR, yyline, yycolumn, yytext());}
 
