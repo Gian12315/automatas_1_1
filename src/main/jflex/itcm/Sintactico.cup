@@ -6,19 +6,42 @@ import java_cup.runtime.*;
 scan with {: return scanner.next_token(); :};*/
 
 // Terminales
-terminal DELIMITADOR;
-terminal OPERADOR_ARITMETICO;
-terminal OPERADOR_CONCATENACION;
-terminal OPERADOR_RANGO;
-terminal OPERADOR_INCREMENTO;
-terminal OPERADOR_LOGICO;
-terminal OPERADOR_RELACIONAL;
-terminal OPERADOR_GENERAL;
+terminal P_COMA;
+terminal I_LLAVE;
+terminal D_LLAVE;
+terminal I_PAR;
+terminal D_PAR;
+terminal MUL;
+terminal POW;
+terminal SUM;
+terminal SUB;
+terminal DIV;
+terminal MOD;
+terminal CONCAT;
+terminal EX_RANGO;
+terminal IN_RANGO;
+terminal INC;
+terminal DEC;
+terminal AND;
+terminal NOT;
+terminal OR;
+terminal MENOR;
+terminal MAYOR;
+terminal MENOR_IGUAL;
+terminal MAYOR_IGUAL;
+terminal IDENTICO;
+terminal DIFERENTE;
+terminal RETORNO;
+terminal IGUAL;
 terminal TIPODEDATO;
-terminal ESTRUCTURAS_CONTROL;
-terminal FUNCIONES;
-terminal LIBRERIA;
-terminal ENTRADAS_SALIDAS;
+terminal FORIF;
+terminal FOR;
+terminal IF;
+terminal FUN;
+terminal RETURN;
+terminal IMPORT;
+terminal INPUT;
+terminal PRINT;
 terminal DECIMAL;
 terminal NUMERO;
 terminal IDENTIFICADOR;
@@ -33,9 +56,6 @@ non terminal EXPR_BOOL;
 // Precedencias
 //precedence left foo, bar;
 
-
-
 // Gramaticas ó Reglas de producción
 start with EXPR_BOOL; // Cambiar esto luego
 
-EXPR_BOOL ::= ID_NUM OPERADOR_RELACIONAL ID_NUM;

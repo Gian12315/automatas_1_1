@@ -32,47 +32,47 @@ text = \".+\"
 // Operadores
 
 // Delimitadores
-";"|
-"{"| 
-"}"| 
-"("| 
-")" {return new Symbol(syn.DELIMITADOR, yyline, yycolumn, yytext());}
+";" {return new Symbol(syn.P_COMA, yyline, yycolumn, yytext());}
+"{" {return new Symbol(syn.I_LLAVE, yyline, yycolumn, yytext());}
+"}" {return new Symbol(syn.D_LLAVE, yyline, yycolumn, yytext());}
+"(" {return new Symbol(syn.I_PAR, yyline, yycolumn, yytext());}
+")" {return new Symbol(syn.D_PAR, yyline, yycolumn, yytext());}
 
 // Operadores Aritmeticos
-"*"| 
-"**"| 
-"+"| 
-"-"| 
-"/"| 
-"%" {return new Symbol(syn.OPERADOR_ARITMETICO, yyline, yycolumn, yytext());}
+"*" {return new Symbol(syn.MUL, yyline, yycolumn, yytext());}
+"**" {return new Symbol(syn.POW, yyline, yycolumn, yytext());}
+"+" {return new Symbol(syn.SUM, yyline, yycolumn, yytext());}
+"-" {return new Symbol(syn.SUB, yyline, yycolumn, yytext());}
+"/" {return new Symbol(syn.DIV, yyline, yycolumn, yytext());}
+"%" {return new Symbol(syn.MOD, yyline, yycolumn, yytext());}
 
 // Operadores Concatenación
-"..." {return new Symbol(syn.OPERADOR_CONCATENACION, yyline, yycolumn, yytext());}
+"..." {return new Symbol(syn.CONCAT, yyline, yycolumn, yytext());}
 
 // Operadores Rango
-".."| 
-"..=" {return new Symbol(syn.OPERADOR_RANGO, yyline, yycolumn, yytext());}
+".." {return new Symbol(syn.EX_RANGO, yyline, yycolumn, yytext())};
+"..=" {return new Symbol(syn.IN_RANGO, yyline, yycolumn, yytext());}
 
 // Operadores Incremento
-"++"| 
-"--" {return new Symbol(syn.OPERADOR_INCREMENTO, yyline, yycolumn, yytext());}
+"++" {return new Symbol(syn.INC, yyline, yycolumn, yytext());}
+"--" {return new Symbol(syn.DEC, yyline, yycolumn, yytext());}
 
 // Operadores Lógicos
-"and"| 
-"not"| 
-"or" {return new Symbol(syn.OPERADOR_LOGICO, yyline, yycolumn, yytext());}
+"and" {return new Symbol(syn.AND, yyline, yycolumn, yytext());}
+"not" {return new Symbol(syn.NOT, yyline, yycolumn, yytext());}
+"or" {return new Symbol(syn.OR, yyline, yycolumn, yytext());}
 
 // Operadores Relacionales
-"<"| 
-">"| 
-"<="| 
-">="| 
-"=="| 
-"<>" {return new Symbol(syn.OPERADOR_RELACIONAL, yyline, yycolumn, yytext());}
+"<" {return new Symbol(syn.MENOR, yyline, yycolumn, yytext());}
+">" {return new Symbol(syn.MAYOR, yyline, yycolumn, yytext());}
+"<=" {return new Symbol(syn.MENOR_IGUAL, yyline, yycolumn, yytext());}
+">=" {return new Symbol(syn.MAYOR_IGUAl, yyline, yycolumn, yytext());}
+"==" {return new Symbol(syn.IDENTICO, yyline, yycolumn, yytext());}
+"<>" {return new Symbol(syn.DIFERENTE, yyline, yycolumn, yytext());}
 
 // Operadores Generales
-"->"| 
-"=" {return new Symbol(syn.OPERADOR_GENERAL, yyline, yycolumn, yytext());}
+"->" {return new Symbol(syn.RETORNO, yyline, yycolumn, yytext());}O 
+"=" {return new Symbol(syn.IGUAL , yyline, yycolumn, yytext());}
 
 /// Palabras Reservadas
 
@@ -84,20 +84,20 @@ text = \".+\"
 "bool" {return new Symbol(syn.TIPODEDATO, yyline, yycolumn, yytext());}
 
 // Estructuras de control
-"forif"| 
-"for"|
-"if" {return new Symbol(syn.ESTRUCTURAS_CONTROL, yyline, yycolumn, yytext());}
+"forif" {return new Symbol(syn.FORIF, yyline, yycolumn, yytext());}
+"for" {return new Symbol(syn.FOR, yyline, yycolumn, yytext());}
+"if" {return new Symbol(syn.IF, yyline, yycolumn, yytext());}
 
 // Manejo de funciones
-"fun"|
-"return" {return new Symbol(syn.FUNCIONES, yyline, yycolumn, yytext());}
+"fun" {return new Symbol(syn.FUN, yyline, yycolumn, yytext());}
+"return" {return new Symbol(syn.RETURN, yyline, yycolumn, yytext());}
 
 // Gestión de librerías
-"import" {return new Symbol(syn.LIBRERIA, yyline, yycolumn, yytext());}
+"import" {return new Symbol(syn.IMPORT, yyline, yycolumn, yytext());}
 
 // I/O
-"input"|
-"print" {return new Symbol(syn.ENTRADAS_SALIDAS, yyline, yycolumn, yytext());}
+"input" {return new Symbol(syn.INPUT, yyline, yycolumn, yytext());}
+"print" {return new Symbol(syn.PRINT, yyline, yycolumn, yytext());}
 
 // Comentarios
 
