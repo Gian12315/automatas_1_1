@@ -1,0 +1,27 @@
+package itcm;
+import java_cup.runtime.*;
+
+/* Preliminaries to set up and use the scanner.  The fuck is this*/
+/*init with {: scanner.init();              :};
+scan with {: return scanner.next_token(); :};*/
+
+// Terminales
+terminal            TIPO_DE_DATO;
+terminal            ID;
+terminal            OPER_RELACIONAL;
+terminal
+
+// No terminales
+non terminal DECLA;
+non terminal ID_NUM;
+non terminal EXPR_BOOL;
+
+// Precedencias
+//precedence left foo, bar;
+
+
+
+// Gramaticas ó Reglas de producción
+start with EXPR_BOOL; // Cambiar esto luego
+
+EXPR_BOOL ::= ID_NUM OPER_RELACIONAL ID_NUM;
