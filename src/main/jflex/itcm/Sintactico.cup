@@ -6,11 +6,7 @@ import java_cup.runtime.*;
 scan with {: return scanner.next_token(); :};*/
 
 // Terminales
-terminal P_COMA;
-terminal I_LLAVE;
-terminal D_LLAVE;
-terminal I_PAR;
-terminal D_PAR;
+terminal P_COMA,I_LLAVE,D_LLAVE,I_PAR,D_PAR,COMA;//Delimitadores
 terminal MUL;
 terminal POW;
 terminal SUM;
@@ -25,11 +21,7 @@ terminal DEC;
 terminal AND;
 terminal NOT;
 terminal OR;
-terminal MENOR;
-terminal MAYOR;
-terminal MENOR_IGUAL;
-terminal MAYOR_IGUAL;
-terminal IDENTICO;
+terminal MENOR, MAYOR,MENOR_IGUAL,MAYOR_IGUAL, IDENTICO;
 terminal DIFERENTE;
 terminal RETORNO;
 terminal IGUAL;
@@ -48,14 +40,107 @@ terminal IDENTIFICADOR;
 terminal TEXTO;
 terminal ERROR;
 
+
 // No terminales
+non terminal OPERADOR_RELACIONAL;
 non terminal DECLA;
 non terminal ID_NUM;
 non terminal EXPR_BOOL;
+non terminal TIPOID;
+non terminal MAS_TIPOID;
+non terminal PARAMETROS;
+non terminal CUERPO;
+non terminal DECLA;
+non terminal OP_ARIT;
+non terminal ARIT;
+non terminal MAS_ARIT;
+non terminal ASIG;
+non terminal VALOR;
+non terminal DEFINICIONES;
+non terminal COND;
+non terminal MAS_COND;
+non terminal OPR_LOGICO;
+non terminal RIF;
+non terminal RFOR;
+non terminal RFORIF;
+non terminal COMPONENTES;
+non terminal CUERPO;
+non terminal MAS_CUERPO;
+non terminal VIENE_ELSE;
+non terminal RFUN;
+non terminal RANGO;
+non terminal INCEXP;
+non terminal PARAMETROS;
+non terminal MAS_TIPOID;
+non terminal OPR_RANGO;
 
 // Precedencias
 //precedence left foo, bar;
 
 // Gramaticas ó Reglas de producción
 start with EXPR_BOOL; // Cambiar esto luego
+
+OPERADOR_RELACIONAL ::= MENOR|MAYOR|MENOR_IGUAL|MAYOR_IGUAL|IDENTICO;
+
+OP_ARIT::= MUL POW SUM SUB DIV MOD ;
+
+OPR_LOGICO ::= AND | NOT | OR;
+
+EXPR_BOOL ::= ID_NUM OPERADOR_RELACIONAL ID_NUM;
+
+TIPOID ::= TIPODEDATO IDENTIFICADOR;
+
+MAS_ARIT ::= OP_ARIT ID_NUM | epsilon;
+
+ARIT ::= ID_NUM OP_ARIT ID_NUM MAS_ARIT | ID_NUM;
+
+DECLA ::= ARIT|TEXTO;
+
+MAS_TIPOID ::= COMA TIPOID | epsilon;
+
+PARAMETROS ::= MAS_TIPOID TIPOID;
+
+VALOR ::= ID_NUM|TEXTO;
+
+ASIG ::= IDENTIFICADOR IGUAL VALOR;
+
+DEFINICIONES ::= DECLA | ASIG;
+
+MASCOND ::=OPR_LOGICO EXPR_BOOL MAS_COND|epsilon;
+
+COND ::= EXPR_BOOL MAS_COND;
+
+ESTRUCTURA ::= RIF|RFOR|RFORIF;
+
+COMPONENTES ::= DEFINICIONES | ESTRUCTURAS;
+
+CUERPO ::= I_LLAVE COMPONENTES MAS_CUERPO D_LLAVE;
+
+MAS_CUERPO ::= CUERPO | epsilon;
+
+RIF ::=IF COND CUERPO VIENE_ELSE;
+
+VIENE_ELSE ::= ELSE CUERPO | epsilon;
+
+RFUN ::= FUN IDENTIFICADOR I_PAR PARAMETROS D_PAR RETORNO TIPODEDATO CUERPO;
+
+RFOR ::= RFOR RANGO IDENTIFICADOR INCEXP CUERPO;
+
+RFORIFR ::= FORIF COND CUERPO;
+
+OPR_RANGO ::= EX_RANGO IN_RANGO;
+
+RANGO ::= ID_NUM OPR_RANGO ID_NUM;
+
+INCEXP ::= ID_NUM |epsilon;
+
+//Rfun ::= FUNCIONES IDENTIFICADOR
+
+// RFOR ::=
+
+// RFORIF ::=
+
+//CUERPO ::=
+
+
 

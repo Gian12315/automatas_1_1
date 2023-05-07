@@ -37,6 +37,7 @@ text = \".+\"
 "}" {return new Symbol(syn.D_LLAVE, yyline, yycolumn, yytext());}
 "(" {return new Symbol(syn.I_PAR, yyline, yycolumn, yytext());}
 ")" {return new Symbol(syn.D_PAR, yyline, yycolumn, yytext());}
+", " {return new Symbol(syn.COMA, yyline, yycolumn, yytext());}
 
 // Operadores Aritmeticos
 "*" {return new Symbol(syn.MUL, yyline, yycolumn, yytext());}
