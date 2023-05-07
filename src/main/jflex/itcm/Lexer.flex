@@ -37,6 +37,7 @@ text = \".+\"
 "}" {return new Symbol(syn.D_LLAVE, yyline, yycolumn, yytext());}
 "(" {return new Symbol(syn.I_PAR, yyline, yycolumn, yytext());}
 ")" {return new Symbol(syn.D_PAR, yyline, yycolumn, yytext());}
+", " {return new Symbol(syn.COMA, yyline, yycolumn, yytext());}
 
 // Operadores Aritmeticos
 "*" {return new Symbol(syn.MUL, yyline, yycolumn, yytext());}
@@ -50,7 +51,7 @@ text = \".+\"
 "..." {return new Symbol(syn.CONCAT, yyline, yycolumn, yytext());}
 
 // Operadores Rango
-".." {return new Symbol(syn.EX_RANGO, yyline, yycolumn, yytext())};
+".." {return new Symbol(syn.EX_RANGO, yyline, yycolumn, yytext());}
 "..=" {return new Symbol(syn.IN_RANGO, yyline, yycolumn, yytext());}
 
 // Operadores Incremento
@@ -71,7 +72,7 @@ text = \".+\"
 "<>" {return new Symbol(syn.DIFERENTE, yyline, yycolumn, yytext());}
 
 // Operadores Generales
-"->" {return new Symbol(syn.RETORNO, yyline, yycolumn, yytext());}O 
+"->" {return new Symbol(syn.RETORNO, yyline, yycolumn, yytext());}
 "=" {return new Symbol(syn.IGUAL , yyline, yycolumn, yytext());}
 
 /// Palabras Reservadas
@@ -87,6 +88,7 @@ text = \".+\"
 "forif" {return new Symbol(syn.FORIF, yyline, yycolumn, yytext());}
 "for" {return new Symbol(syn.FOR, yyline, yycolumn, yytext());}
 "if" {return new Symbol(syn.IF, yyline, yycolumn, yytext());}
+"else" {return new Symbol(syn.ELSE, yyline, yycolumn, yytext());}
 
 // Manejo de funciones
 "fun" {return new Symbol(syn.FUN, yyline, yycolumn, yytext());}
@@ -106,7 +108,7 @@ text = \".+\"
 " " {System.out.print("");}
 
 
-{numbers}"."{return new Symbol(syn.DECIMAL, yyline, yycolumn, yytext());}
+{numbers}"." {return new Symbol(syn.DECIMAL, yyline, yycolumn, yytext());}
 {numbers} {return new Symbol(syn.NUMERO, yyline, yycolumn, yytext());}
 {letters} {return new Symbol(syn.IDENTIFICADOR, yyline, yycolumn, yytext());}
 
