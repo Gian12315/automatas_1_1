@@ -1,9 +1,6 @@
 package itcm;
 import java_cup.runtime.*;
 
-/* Preliminaries to set up and use the scanner.  The fuck is this*/
-/*init with {: scanner.init();              :};
-scan with {: return scanner.next_token(); :};*/
 
 // Terminales
 terminal P_COMA,I_LLAVE,D_LLAVE,I_PAR,D_PAR,COMA;//Delimitadores
@@ -39,6 +36,7 @@ terminal NUMERO;
 terminal IDENTIFICADOR;
 terminal TEXTO;
 terminal ERROR;
+terminal ELSE;
 
 
 // No terminales
@@ -48,9 +46,6 @@ non terminal ID_NUM;
 non terminal EXPR_BOOL;
 non terminal TIPOID;
 non terminal MAS_TIPOID;
-non terminal PARAMETROS;
-non terminal CUERPO;
-non terminal DECLA;
 non terminal OP_ARIT;
 non terminal ARIT;
 non terminal MAS_ARIT;
@@ -71,8 +66,9 @@ non terminal RFUN;
 non terminal RANGO;
 non terminal INCEXP;
 non terminal PARAMETROS;
-non terminal MAS_TIPOID;
 non terminal OPR_RANGO;
+non terminal ESTRUCTURAS;
+non terminal MASCOND;
 
 // Precedencias
 //precedence left foo, bar;
@@ -90,13 +86,13 @@ EXPR_BOOL ::= ID_NUM OPERADOR_RELACIONAL ID_NUM;
 
 TIPOID ::= TIPODEDATO IDENTIFICADOR;
 
-MAS_ARIT ::= OP_ARIT ID_NUM | epsilon;
+MAS_ARIT ::= OP_ARIT ID_NUM | /* empty */;
 
 ARIT ::= ID_NUM OP_ARIT ID_NUM MAS_ARIT | ID_NUM;
 
 DECLA ::= ARIT|TEXTO;
 
-MAS_TIPOID ::= COMA TIPOID | epsilon;
+MAS_TIPOID ::= COMA TIPOID | /* empty */;
 
 PARAMETROS ::= MAS_TIPOID TIPOID;
 
@@ -106,21 +102,21 @@ ASIG ::= IDENTIFICADOR IGUAL VALOR;
 
 DEFINICIONES ::= DECLA | ASIG;
 
-MASCOND ::=OPR_LOGICO EXPR_BOOL MAS_COND|epsilon;
+MASCOND ::=OPR_LOGICO EXPR_BOOL MAS_COND | /* empty */;
 
 COND ::= EXPR_BOOL MAS_COND;
 
-ESTRUCTURA ::= RIF|RFOR|RFORIF;
+ESTRUCTURAS ::= RIF|RFOR|RFORIF;
 
 COMPONENTES ::= DEFINICIONES | ESTRUCTURAS;
 
 CUERPO ::= I_LLAVE COMPONENTES MAS_CUERPO D_LLAVE;
 
-MAS_CUERPO ::= CUERPO | epsilon;
+MAS_CUERPO ::= CUERPO | /* empty */;
 
 RIF ::=IF COND CUERPO VIENE_ELSE;
 
-VIENE_ELSE ::= ELSE CUERPO | epsilon;
+VIENE_ELSE ::= ELSE CUERPO | /* empty */;
 
 RFUN ::= FUN IDENTIFICADOR I_PAR PARAMETROS D_PAR RETORNO TIPODEDATO CUERPO;
 
@@ -132,7 +128,7 @@ OPR_RANGO ::= EX_RANGO IN_RANGO;
 
 RANGO ::= ID_NUM OPR_RANGO ID_NUM;
 
-INCEXP ::= ID_NUM |epsilon;
+INCEXP ::= ID_NUM | /* empty */;
 
 //Rfun ::= FUNCIONES IDENTIFICADOR
 
