@@ -1,16 +1,20 @@
 package itcm;
-import static itcm.Tokens.*;
+import java_cup.runtime.Symbol;
 
 %%
 
 %public
 %class Lexer
-%type Tokens
 %line
 %column
 %unicode
 %ignorecase
 %cup
+%char
+
+%eofval{
+{return new Symbol(syn.EOF, null);}
+%eofval}
 
 %init{
     yyline = 1;
@@ -37,7 +41,7 @@ text = \".+\"
 "}" {return new Symbol(syn.D_LLAVE, yyline, yycolumn, yytext());}
 "(" {return new Symbol(syn.I_PAR, yyline, yycolumn, yytext());}
 ")" {return new Symbol(syn.D_PAR, yyline, yycolumn, yytext());}
-", " {return new Symbol(syn.COMA, yyline, yycolumn, yytext());}
+", " {return new Symbol(syn.COMA, yyline, yycolumn, yytext());}
 
 // Operadores Aritmeticos
 "*" {return new Symbol(syn.MUL, yyline, yycolumn, yytext());}
@@ -67,7 +71,7 @@ text = \".+\"
 "<" {return new Symbol(syn.MENOR, yyline, yycolumn, yytext());}
 ">" {return new Symbol(syn.MAYOR, yyline, yycolumn, yytext());}
 "<=" {return new Symbol(syn.MENOR_IGUAL, yyline, yycolumn, yytext());}
-">=" {return new Symbol(syn.MAYOR_IGUAl, yyline, yycolumn, yytext());}
+">=" {return new Symbol(syn.MAYOR_IGUAL, yyline, yycolumn, yytext());}
 "==" {return new Symbol(syn.IDENTICO, yyline, yycolumn, yytext());}
 "<>" {return new Symbol(syn.DIFERENTE, yyline, yycolumn, yytext());}
 

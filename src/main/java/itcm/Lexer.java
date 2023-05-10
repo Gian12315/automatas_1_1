@@ -3,7 +3,7 @@
 // source: src/main/jflex/itcm/Lexer.flex
 
 package itcm;
-import static itcm.Tokens.*;
+import java_cup.runtime.Symbol;
 
 
 @SuppressWarnings("fallthrough")
@@ -504,7 +504,6 @@ public class Lexer implements java_cup.runtime.Scanner {
   private int yycolumn;
 
   /** Number of characters up to the start of the matched text. */
-  @SuppressWarnings("unused")
   private long yychar;
 
   /** Whether the scanner is currently at the beginning of a line. */
@@ -801,7 +800,7 @@ public class Lexer implements java_cup.runtime.Scanner {
    * @return the next token.
    * @exception java.io.IOException if any I/O-Error occurs.
    */
-  @Override  public Tokens next_token() throws java.io.IOException
+  @Override  public java_cup.runtime.Symbol next_token() throws java.io.IOException
   {
     int zzInput;
     int zzAction;
@@ -818,6 +817,8 @@ public class Lexer implements java_cup.runtime.Scanner {
 
     while (true) {
       zzMarkedPosL = zzMarkedPos;
+
+      yychar+= zzMarkedPosL-zzStartRead;
 
       boolean zzR = false;
       int zzCh;
@@ -939,7 +940,8 @@ public class Lexer implements java_cup.runtime.Scanner {
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
             zzDoEOF();
-          { return new java_cup.runtime.Symbol(sym.EOF); }
+          { {return new Symbol(syn.EOF, null);}
+ }
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
@@ -1044,7 +1046,7 @@ public class Lexer implements java_cup.runtime.Scanner {
           // fall through
           case 66: break;
           case 21:
-            { return new Symbol(syn.COMA, yyline, yycolumn, yytext());
+            { return new Symbol(syn.COMA, yyline, yycolumn, yytext());
             }
           // fall through
           case 67: break;
@@ -1089,7 +1091,7 @@ public class Lexer implements java_cup.runtime.Scanner {
           // fall through
           case 75: break;
           case 30:
-            { return new Symbol(syn.MAYOR_IGUAl, yyline, yycolumn, yytext());
+            { return new Symbol(syn.MAYOR_IGUAL, yyline, yycolumn, yytext());
             }
           // fall through
           case 76: break;
