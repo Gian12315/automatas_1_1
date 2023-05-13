@@ -1,1 +1,3 @@
-hola naco rambo
+fun pepe (int neen) -> int {
+    neen = 40
+ }

@@ -2,18 +2,6 @@ package itcm;
 import java_cup.runtime.*;
 
 
-parser code
-{:
-    private Symbol s;
-    public void syntax_error(Symbol s) {
-           this.s =s;
-    }
-
-    public Symbol getS() {
-        return this.s;
-    }
-:};
-
 // Terminales
 terminal P_COMA,I_LLAVE,D_LLAVE,I_PAR,D_PAR,COMA;//Delimitadores
 terminal MUL;
@@ -82,12 +70,72 @@ non terminal OPR_RANGO;
 non terminal ESTRUCTURAS;
 non terminal MASCOND;
 
-non terminal VIENEID;
-
 // Precedencias
 //precedence left foo, bar;
 
 // Gramaticas ó Reglas de producción
-start with ID_NUM; // Cambiar esto luego
+start with RFUN; // Cambiar esto luego
 
-ID_NUM ::= IDENTIFICADOR:a ID_NUM {: RESULT=a; :} | /* empty */  ;
+ID_NUM ::= IDENTIFICADOR | NUMERO {: System.out.println("PLATANO A 30.90 EN CHIAPAS"); :};
+
+OPERADOR_RELACIONAL ::= MENOR|MAYOR|MENOR_IGUAL|MAYOR_IGUAL|IDENTICO;
+
+OP_ARIT::= MUL POW SUM SUB DIV MOD ;
+
+OPR_LOGICO ::= AND | NOT | OR;
+
+EXPR_BOOL ::= ID_NUM OPERADOR_RELACIONAL ID_NUM {: System.out.println("CHINGA TU MADRE OAXACA"); :};
+
+TIPOID ::= TIPODEDATO IDENTIFICADOR;
+
+MAS_ARIT ::= OP_ARIT ID_NUM | /* empty */;
+
+ARIT ::= ID_NUM OP_ARIT ID_NUM MAS_ARIT | ID_NUM;
+
+DECLA ::= ARIT | TEXTO;
+
+PARAMETROS ::= TIPOID MAS_TIPOID;
+
+MAS_TIPOID ::= COMA PARAMETROS | /* empty */;
+
+VALOR ::= ID_NUM|TEXTO;
+
+ASIG ::= IDENTIFICADOR IGUAL VALOR;
+
+DEFINICIONES ::= DECLA | ASIG;
+
+MASCOND ::=OPR_LOGICO EXPR_BOOL MAS_COND | /* empty */;
+
+COND ::= EXPR_BOOL MAS_COND;
+
+ESTRUCTURAS ::= RIF | RFOR | RFORIF;
+
+COMPONENTES ::= DEFINICIONES | ESTRUCTURAS;
+
+CUERPO ::= I_LLAVE COMPONENTES MAS_CUERPO D_LLAVE;
+
+MAS_CUERPO ::= COMPONENTES MAS_CUERPO | /* empty */;
+
+RIF ::=IF COND CUERPO VIENE_ELSE;
+
+VIENE_ELSE ::= ELSE CUERPO | /* empty */;
+
+RFUN ::= FUN IDENTIFICADOR I_PAR PARAMETROS D_PAR RETORNO TIPODEDATO CUERPO;
+
+RFOR ::= FOR RANGO IDENTIFICADOR INCEXP CUERPO;
+
+RFORIFR ::= FORIF COND CUERPO;
+
+OPR_RANGO ::= EX_RANGO IN_RANGO;
+
+RANGO ::= ID_NUM OPR_RANGO ID_NUM;
+
+INCEXP ::= ID_NUM | /* empty */;
+
+//Rfun ::= FUNCIONES IDENTIFICADOR
+
+// RFOR ::=
+
+// RFORIF ::=
+
+//CUERPO ::=

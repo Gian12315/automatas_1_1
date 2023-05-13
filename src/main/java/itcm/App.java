@@ -26,8 +26,9 @@ public class App {
                         Symbol s;
                         do {
                                 s = pars.parse();
+                                System.out.println(s.sym);
                                 System.out.println(s.value);
-                        } while (s.value == null);
+                        } while (s.value != null);
 
                 } catch (Exception e) {
                         System.out.println("Error " + e.getMessage());

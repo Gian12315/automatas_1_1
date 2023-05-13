@@ -283,14 +283,15 @@ public class Lexer implements java_cup.runtime.Scanner {
     "\1\0\1\1\1\2\1\3\1\1\1\4\1\5\1\6"+
     "\1\7\1\10\1\2\1\11\1\1\1\12\1\13\1\14"+
     "\1\15\1\16\1\17\15\20\1\21\1\22\1\0\1\23"+
-    "\1\24\1\25\1\26\1\27\1\30\1\31\1\32\1\33"+
-    "\1\34\1\35\1\36\7\20\1\37\3\20\1\40\3\20"+
-    "\1\41\1\42\1\43\1\13\1\44\4\20\1\45\1\46"+
-    "\2\20\1\47\1\50\3\20\1\32\1\20\1\51\7\20"+
-    "\1\52\1\20\1\53\1\54\2\20\1\55\1\56";
+    "\1\24\1\25\1\26\1\27\1\30\1\31\1\0\1\32"+
+    "\1\33\1\34\1\35\7\20\1\36\3\20\1\37\3\20"+
+    "\1\40\1\41\1\42\1\43\1\44\4\20\1\45\1\46"+
+    "\2\20\1\47\1\50\3\20\1\0\1\20\1\51\6\20"+
+    "\1\43\1\20\1\52\1\20\1\53\1\54\2\20\1\0"+
+    "\1\55\1\56\1\43";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[98];
+    int [] result = new int[101];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -325,12 +326,12 @@ public class Lexer implements java_cup.runtime.Scanner {
     "\0\u0616\0\u063f\0\u0334\0\u0668\0\u0691\0\u06ba\0\u0453\0\51"+
     "\0\51\0\u06e3\0\u0334\0\u070c\0\u0735\0\u075e\0\u0787\0\u07b0"+
     "\0\u0334\0\u07d9\0\u0802\0\u0334\0\u0334\0\u082b\0\u0854\0\u087d"+
-    "\0\51\0\u08a6\0\u0334\0\u08cf\0\u08f8\0\u0921\0\u094a\0\u0973"+
-    "\0\u099c\0\u09c5\0\u0334\0\u09ee\0\u0334\0\u0334\0\u0a17\0\u0a40"+
-    "\0\u0334\0\u0334";
+    "\0\u08a6\0\u08cf\0\u0334\0\u08f8\0\u0921\0\u094a\0\u0973\0\u099c"+
+    "\0\u09c5\0\u09ee\0\u0a17\0\u0334\0\u0a40\0\u0334\0\u0334\0\u0a69"+
+    "\0\u0a92\0\u0abb\0\u0334\0\u0334\0\u0abb";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[98];
+    int [] result = new int[101];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -382,15 +383,16 @@ public class Lexer implements java_cup.runtime.Scanner {
     "\21\32\26\0\4\32\1\123\16\32\26\0\10\32\1\124"+
     "\12\32\26\0\15\32\1\125\5\32\26\0\22\32\1\126"+
     "\26\0\14\32\1\127\6\32\26\0\22\32\1\130\26\0"+
-    "\10\32\1\131\12\32\26\0\12\32\1\132\10\32\26\0"+
-    "\5\32\1\133\15\32\26\0\17\32\1\134\3\32\26\0"+
-    "\21\32\1\135\1\32\26\0\21\32\1\136\1\32\26\0"+
-    "\17\32\1\137\3\32\26\0\14\32\1\140\6\32\26\0"+
-    "\4\32\1\114\16\32\26\0\21\32\1\141\1\32\26\0"+
-    "\14\32\1\142\6\32\26\0\6\32\1\114\14\32\2\0";
+    "\10\32\1\131\12\32\21\0\1\132\55\0\12\32\1\133"+
+    "\10\32\26\0\5\32\1\134\15\32\26\0\17\32\1\135"+
+    "\3\32\26\0\21\32\1\136\1\32\26\0\21\32\1\137"+
+    "\1\32\26\0\17\32\1\140\3\32\26\0\14\32\1\141"+
+    "\6\32\17\0\1\142\1\0\1\132\55\0\4\32\1\114"+
+    "\16\32\26\0\21\32\1\143\1\32\26\0\14\32\1\144"+
+    "\6\32\26\0\6\32\1\114\14\32\21\0\1\145\31\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[2665];
+    int [] result = new int[2788];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -434,11 +436,11 @@ public class Lexer implements java_cup.runtime.Scanner {
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
     "\1\0\1\11\3\1\3\11\7\1\1\11\20\1\2\11"+
-    "\1\0\2\11\1\1\2\11\1\1\1\11\1\1\4\11"+
-    "\20\1\2\11\17\1\1\11\21\1";
+    "\1\0\2\11\1\1\2\11\1\1\1\11\1\0\4\11"+
+    "\20\1\2\11\17\1\1\0\20\1\1\0\3\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[98];
+    int [] result = new int[101];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -1021,7 +1023,7 @@ public class Lexer implements java_cup.runtime.Scanner {
           // fall through
           case 61: break;
           case 16:
-            { System.out.println("yytext debe valer = " + yytext()); return new Symbol(syn.IDENTIFICADOR, yyline, yycolumn, yytext());
+            { return new Symbol(syn.IDENTIFICADOR, yyline, yycolumn, yytext());
             }
           // fall through
           case 62: break;
@@ -1071,52 +1073,52 @@ public class Lexer implements java_cup.runtime.Scanner {
           // fall through
           case 71: break;
           case 26:
-            { return new Symbol(syn.DECIMAL, yyline, yycolumn, yytext());
+            { return new Symbol(syn.MENOR_IGUAL, yyline, yycolumn, yytext());
             }
           // fall through
           case 72: break;
           case 27:
-            { return new Symbol(syn.MENOR_IGUAL, yyline, yycolumn, yytext());
+            { return new Symbol(syn.DIFERENTE, yyline, yycolumn, yytext());
             }
           // fall through
           case 73: break;
           case 28:
-            { return new Symbol(syn.DIFERENTE, yyline, yycolumn, yytext());
+            { return new Symbol(syn.IDENTICO, yyline, yycolumn, yytext());
             }
           // fall through
           case 74: break;
           case 29:
-            { return new Symbol(syn.IDENTICO, yyline, yycolumn, yytext());
+            { return new Symbol(syn.MAYOR_IGUAL, yyline, yycolumn, yytext());
             }
           // fall through
           case 75: break;
           case 30:
-            { return new Symbol(syn.MAYOR_IGUAL, yyline, yycolumn, yytext());
+            { return new Symbol(syn.IF, yyline, yycolumn, yytext());
             }
           // fall through
           case 76: break;
           case 31:
-            { return new Symbol(syn.IF, yyline, yycolumn, yytext());
+            { return new Symbol(syn.OR, yyline, yycolumn, yytext());
             }
           // fall through
           case 77: break;
           case 32:
-            { return new Symbol(syn.OR, yyline, yycolumn, yytext());
+            { return new Symbol(syn.TEXTO, yyline, yycolumn, yytext());
             }
           // fall through
           case 78: break;
           case 33:
-            { return new Symbol(syn.TEXTO, yyline, yycolumn, yytext());
+            { return new Symbol(syn.CONCAT, yyline, yycolumn, yytext());
             }
           // fall through
           case 79: break;
           case 34:
-            { return new Symbol(syn.CONCAT, yyline, yycolumn, yytext());
+            { return new Symbol(syn.IN_RANGO, yyline, yycolumn, yytext());
             }
           // fall through
           case 80: break;
           case 35:
-            { return new Symbol(syn.IN_RANGO, yyline, yycolumn, yytext());
+            { return new Symbol(syn.DECIMAL, yyline, yycolumn, yytext());
             }
           // fall through
           case 81: break;
