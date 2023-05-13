@@ -74,7 +74,9 @@ non terminal MASCOND;
 //precedence left foo, bar;
 
 // Gramaticas ó Reglas de producción
-start with EXPR_BOOL; // Cambiar esto luego
+start with ID_NUM; // Cambiar esto luego
+
+ID_NUM ::= IDENTIFICADOR | NUMERO {: System.out.println("PLATANO A 30.90 EN CHIAPAS"); :};
 
 OPERADOR_RELACIONAL ::= MENOR|MAYOR|MENOR_IGUAL|MAYOR_IGUAL|IDENTICO;
 
@@ -82,7 +84,7 @@ OP_ARIT::= MUL POW SUM SUB DIV MOD ;
 
 OPR_LOGICO ::= AND | NOT | OR;
 
-EXPR_BOOL ::= ID_NUM OPERADOR_RELACIONAL ID_NUM;
+EXPR_BOOL ::= ID_NUM OPERADOR_RELACIONAL ID_NUM {: System.out.println("CHINGA TU MADRE OAXACA"); :};
 
 TIPOID ::= TIPODEDATO IDENTIFICADOR;
 
