@@ -8,6 +8,8 @@ import java.io.FileInputStream;
  */
 
 import java.io.FileReader;
+import java.io.StringReader;
+
 import java_cup.runtime.Symbol;
 
 public class App {
@@ -21,13 +23,20 @@ public class App {
 
                 Sintactico pars;
                 try {
-                        pars = new Sintactico(new Lexer(new FileReader("test.txt")));
+                    String path = System.getProperty("user.dir") + "\\src\\main\\java\\itcm\\test.txt";
+                    FileReader fileReader = new FileReader(path);
 
-                        while (true) {
-                                Symbol s = pars.parse();
-                                System.out.println(s);
-                        }
-                } catch (Exception e) {
+                    String text = "";
+                    do{
+                        text += (char) fileReader.read();
+                    }
+                    while (fileReader.read() != -1);
+
+                     pars = new Sintactico(new Lexer(fileReader));
+                    //pars = new Sintactico(new Lexer(new StringReader(text)));
+                     pars.parse();
+
+                } catch (Exception e){
                         System.out.println("Error " + e.getMessage());
                         e.printStackTrace();
                 }
