@@ -1,3 +1,5 @@
 fun pepe (int neen) -> int {
-    neen = 40
+    neen = 40;
+
+    return neen;
  }
