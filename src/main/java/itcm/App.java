@@ -23,10 +23,12 @@ public class App {
                 try {
                         pars = new Sintactico(new Lexer(new FileReader("test.txt")));
 
-                        while (true) {
-                                Symbol s = pars.parse();
-                                System.out.println(s);
-                        }
+                        Symbol s;
+                        do {
+                                s = pars.parse();
+                                System.out.println(s.value);
+                        } while (s.value == null);
+
                 } catch (Exception e) {
                         System.out.println("Error " + e.getMessage());
                         e.printStackTrace();

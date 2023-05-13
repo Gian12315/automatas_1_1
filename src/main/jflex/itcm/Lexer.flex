@@ -114,7 +114,7 @@ text = \".+\"
 
 {numbers}"." {return new Symbol(syn.DECIMAL, yyline, yycolumn, yytext());}
 {numbers} {return new Symbol(syn.NUMERO, yyline, yycolumn, yytext());}
-{letters} {return new Symbol(syn.IDENTIFICADOR, yyline, yycolumn, yytext());}
+{letters} {System.out.println("yytext debe valer = " + yytext()); return new Symbol(syn.IDENTIFICADOR, yyline, yycolumn, yytext());}
 
 {spaces} {/* Ignore */}
 

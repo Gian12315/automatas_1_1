@@ -1021,7 +1021,7 @@ public class Lexer implements java_cup.runtime.Scanner {
           // fall through
           case 61: break;
           case 16:
-            { return new Symbol(syn.IDENTIFICADOR, yyline, yycolumn, yytext());
+            { System.out.println("yytext debe valer = " + yytext()); return new Symbol(syn.IDENTIFICADOR, yyline, yycolumn, yytext());
             }
           // fall through
           case 62: break;
