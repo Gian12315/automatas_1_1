@@ -40,35 +40,37 @@ terminal ELSE;
 
 
 // No terminales
-non terminal OPERADOR_RELACIONAL;
-non terminal DECLA;
-non terminal ID_NUM;
-non terminal EXPR_BOOL;
-non terminal TIPOID;
-non terminal MAS_TIPOID;
-non terminal OP_ARIT;
 non terminal ARIT;
-non terminal MAS_ARIT;
 non terminal ASIG;
-non terminal VALOR;
-non terminal DEFINICIONES;
+non terminal COMPONENTES;
 non terminal COND;
+non terminal CUERPO;
+non terminal DECLA;
+non terminal DEFINICIONES;
+non terminal ESTRUCTURAS;
+non terminal EXPR_BOOL;
+non terminal ID_NUM;
+non terminal INCEXP;
+non terminal RRETURN;
+non terminal MASCOND;
+non terminal MAS_ARIT;
 non terminal MAS_COND;
+non terminal MAS_CUERPO;
+non terminal MAS_TIPOID;
+non terminal OPERADOR_RELACIONAL;
 non terminal OPR_LOGICO;
-non terminal RIF;
+non terminal OPR_RANGO;
+non terminal OP_ARIT;
+non terminal PARAMETROS;
+non terminal RPRINT;
+non terminal RANGO;
 non terminal RFOR;
 non terminal RFORIF;
-non terminal COMPONENTES;
-non terminal CUERPO;
-non terminal MAS_CUERPO;
-non terminal VIENE_ELSE;
 non terminal RFUN;
-non terminal RANGO;
-non terminal INCEXP;
-non terminal PARAMETROS;
-non terminal OPR_RANGO;
-non terminal ESTRUCTURAS;
-non terminal MASCOND;
+non terminal RIF;
+non terminal TIPOID;
+non terminal VALOR;
+non terminal VIENE_ELSE;
 
 // Precedencias
 //precedence left foo, bar;
@@ -76,47 +78,66 @@ non terminal MASCOND;
 // Gramaticas ó Reglas de producción
 start with RFUN; // Cambiar esto luego
 
+//Nivel 1
 ID_NUM ::= IDENTIFICADOR | NUMERO {: System.out.println("PLATANO A 30.90 EN CHIAPAS"); :};
 
 OPERADOR_RELACIONAL ::= MENOR|MAYOR|MENOR_IGUAL|MAYOR_IGUAL|IDENTICO;
 
-OP_ARIT::= MUL POW SUM SUB DIV MOD ;
+OP_ARIT::= MUL|POW|SUM|SUB|DIV|MOD ;
 
-OPR_LOGICO ::= AND | NOT | OR;
-
-EXPR_BOOL ::= ID_NUM OPERADOR_RELACIONAL ID_NUM {: System.out.println("CHINGA TU MADRE OAXACA"); :};
+OPR_LOGICO ::= AND|NOT|OR;
 
 TIPOID ::= TIPODEDATO IDENTIFICADOR;
 
+OPR_RANGO ::= EX_RANGO|IN_RANGO;
+
+//Nivel 2
+ARIT ::= ID_NUM OP_ARIT ID_NUM MAS_ARIT | ID_NUM;//Expresion aritmetica
+
 MAS_ARIT ::= OP_ARIT ID_NUM | /* empty */;
 
-ARIT ::= ID_NUM OP_ARIT ID_NUM MAS_ARIT | ID_NUM;
+EXPR_BOOL ::= ARIT OPERADOR_RELACIONAL ARIT {: System.out.println("CHINGA TU MADRE OAXACA"); :};
 
-DECLA ::= ARIT | TEXTO;
+VALOR ::= ARIT|TEXTO;//Valor asignado
 
-PARAMETROS ::= TIPOID MAS_TIPOID;
+MAS_TIPOID ::= COMA TIPOID | /* empty */;
 
-MAS_TIPOID ::= COMA PARAMETROS | /* empty */;
+INCEXP ::= ID_NUM | /* empty */;
 
-VALOR ::= ID_NUM|TEXTO;
+RANGO ::= ID_NUM OPR_RANGO ID_NUM;
 
-ASIG ::= IDENTIFICADOR IGUAL VALOR;
+//Nivel 3
 
-DEFINICIONES ::= DECLA | ASIG;
+RPRINT ::= PRINT I_PAR VALOR:a D_PAR P_COMA;
 
-MASCOND ::=OPR_LOGICO EXPR_BOOL MAS_COND | /* empty */;
+RRETURN ::= RETURN VALOR:a P_COMA;
 
-COND ::= EXPR_BOOL MAS_COND;
+ASIG ::= IDENTIFICADOR IGUAL VALOR P_COMA;
+
+PARAMETROS ::= MAS_TIPOID TIPOID;
+
+MAS_COND ::= OPR_LOGICO COND | /* empty */;
+
+COND ::= EXPR_BOOL MAS_COND {: System.out.println("TIlin"); :};
+
+
+//Nivel 4
+DECLA ::= TIPODEDATO ASIG;
+
+//Nivel 5
+DEFINICIONES ::= DECLA | ASIG | RPRINT | RRETURN;
+
+//Nivel 6
+
+COMPONENTES ::= DEFINICIONES | ESTRUCTURAS;
 
 ESTRUCTURAS ::= RIF | RFOR | RFORIF;
 
-COMPONENTES ::= DEFINICIONES P_COMA | ESTRUCTURAS;
-
 CUERPO ::= I_LLAVE COMPONENTES MAS_CUERPO D_LLAVE;
 
-MAS_CUERPO ::= COMPONENTES MAS_CUERPO | RETURN | /* empty */;
+MAS_CUERPO ::= COMPONENTES MAS_CUERPO | /* empty */;
 
-RIF ::=IF COND CUERPO VIENE_ELSE;
+RIF ::= IF COND CUERPO VIENE_ELSE;
 
 VIENE_ELSE ::= ELSE CUERPO | /* empty */;
 
@@ -124,18 +145,4 @@ RFUN ::= FUN IDENTIFICADOR I_PAR PARAMETROS D_PAR RETORNO TIPODEDATO CUERPO;
 
 RFOR ::= FOR RANGO IDENTIFICADOR INCEXP CUERPO;
 
-RFORIFR ::= FORIF COND CUERPO;
-
-OPR_RANGO ::= EX_RANGO IN_RANGO;
-
-RANGO ::= ID_NUM OPR_RANGO ID_NUM;
-
-INCEXP ::= ID_NUM | /* empty */;
-
-//Rfun ::= FUNCIONES IDENTIFICADOR
-
-// RFOR ::=
-
-// RFORIF ::=
-
-//CUERPO ::=
+RFORIF ::= FORIF COND CUERPO;
