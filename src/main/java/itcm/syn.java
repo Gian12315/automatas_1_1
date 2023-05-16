@@ -8,7 +8,7 @@ package itcm;
 /** CUP generated interface containing symbol constants. */
 public interface syn {
   /* terminals */
-  public static final int NUMERO = 39;
+  public static final int NUMERO = 40;
   public static final int POW = 9;
   public static final int D_PAR = 6;
   public static final int CONCAT = 14;
@@ -19,7 +19,7 @@ public interface syn {
   public static final int FOR = 32;
   public static final int D_LLAVE = 4;
   public static final int I_LLAVE = 3;
-  public static final int IDENTIFICADOR = 40;
+  public static final int IDENTIFICADOR = 41;
   public static final int NOT = 20;
   public static final int AND = 19;
   public static final int IGUAL = 29;
@@ -31,6 +31,7 @@ public interface syn {
   public static final int IF = 33;
   public static final int RETORNO = 28;
   public static final int IDENTICO = 26;
+  public static final int DECIMAL = 39;
   public static final int EOF = 0;
   public static final int RETURN = 35;
   public static final int error = 1;
@@ -38,16 +39,16 @@ public interface syn {
   public static final int COMA = 7;
   public static final int MENOR = 22;
   public static final int MOD = 13;
-  public static final int ERROR = 42;
+  public static final int ERROR = 43;
   public static final int IMPORT = 36;
   public static final int MAYOR = 23;
   public static final int I_PAR = 5;
-  public static final int ELSE = 43;
+  public static final int ELSE = 44;
   public static final int MAYOR_IGUAL = 25;
   public static final int P_COMA = 2;
   public static final int SUM = 10;
   public static final int EX_RANGO = 15;
-  public static final int TEXTO = 41;
+  public static final int TEXTO = 42;
   public static final int DEC = 18;
   public static final int MENOR_IGUAL = 24;
   public static final int SUB = 11;
@@ -92,6 +93,7 @@ public interface syn {
   "IMPORT",
   "INPUT",
   "PRINT",
+  "DECIMAL",
   "NUMERO",
   "IDENTIFICADOR",
   "TEXTO",

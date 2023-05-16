@@ -1,7 +1,18 @@
 package itcm;
 import java_cup.runtime.*;
 
+parser code
+{:
+    private Symbol s;
 
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+    }
+:};
 // Terminales
 terminal P_COMA,I_LLAVE,D_LLAVE,I_PAR,D_PAR,COMA;//Delimitadores
 terminal MUL;
@@ -31,7 +42,7 @@ terminal RETURN;
 terminal IMPORT;
 terminal INPUT;
 terminal PRINT;
-//terminal DECIMAL; no se utiliza de momento
+terminal DECIMAL;
 terminal NUMERO;
 terminal IDENTIFICADOR;
 terminal TEXTO;
@@ -76,11 +87,7 @@ non terminal VIENE_ELSE;
 //precedence left foo, bar;
 
 // Gramaticas ó Reglas de producción
-<<<<<<< HEAD
 start with RFUN; // Cambiar esto luego
-=======
-start with ID_NUM; // Cambiar esto luego
->>>>>>> d13d5d0922dbfcce04d1ac8bb5d57fca5ca10b93
 
 //Nivel 1
 ID_NUM ::= IDENTIFICADOR | NUMERO {: System.out.println("PLATANO A 30.90 EN CHIAPAS"); :};
@@ -89,11 +96,7 @@ OPERADOR_RELACIONAL ::= MENOR|MAYOR|MENOR_IGUAL|MAYOR_IGUAL|IDENTICO;
 
 OP_ARIT::= MUL|POW|SUM|SUB|DIV|MOD ;
 
-<<<<<<< HEAD
 OPR_LOGICO ::= AND|NOT|OR;
-=======
-OPR_LOGICO ::= AND | NOT | OR;
->>>>>>> d13d5d0922dbfcce04d1ac8bb5d57fca5ca10b93
 
 TIPOID ::= TIPODEDATO IDENTIFICADOR;
 
@@ -104,11 +107,7 @@ ARIT ::= ID_NUM OP_ARIT ID_NUM MAS_ARIT | ID_NUM;//Expresion aritmetica
 
 MAS_ARIT ::= OP_ARIT ID_NUM | /* empty */;
 
-<<<<<<< HEAD
 EXPR_BOOL ::= ARIT OPERADOR_RELACIONAL ARIT {: System.out.println("CHINGA TU MADRE OAXACA"); :};
-=======
-EXPR_BOOL ::= ID_NUM OPERADOR_RELACIONAL ID_NUM {: System.out.println("CHINGA TU MADRE OAXACA"); :};
->>>>>>> d13d5d0922dbfcce04d1ac8bb5d57fca5ca10b93
 
 VALOR ::= ARIT|TEXTO;//Valor asignado
 
@@ -120,18 +119,14 @@ RANGO ::= ID_NUM OPR_RANGO ID_NUM;
 
 //Nivel 3
 
-<<<<<<< HEAD
 RPRINT ::= PRINT I_PAR VALOR:a D_PAR P_COMA;
 
 RRETURN ::= RETURN VALOR:a P_COMA;
 
-=======
->>>>>>> d13d5d0922dbfcce04d1ac8bb5d57fca5ca10b93
 ASIG ::= IDENTIFICADOR IGUAL VALOR P_COMA;
 
 PARAMETROS ::= MAS_TIPOID TIPOID;
 
-<<<<<<< HEAD
 MAS_COND ::= OPR_LOGICO COND | /* empty */;
 
 COND ::= EXPR_BOOL MAS_COND {: System.out.println("TIlin"); :};
@@ -139,40 +134,19 @@ COND ::= EXPR_BOOL MAS_COND {: System.out.println("TIlin"); :};
 
 //Nivel 4
 DECLA ::= TIPODEDATO ASIG;
-=======
-MASCOND ::=OPR_LOGICO EXPR_BOOL MAS_COND | /* empty */;
->>>>>>> d13d5d0922dbfcce04d1ac8bb5d57fca5ca10b93
 
 //Nivel 5
 DEFINICIONES ::= DECLA | ASIG | RPRINT | RRETURN;
 
-<<<<<<< HEAD
-=======
-
-//Nivel 4
-DECLA ::= TIPODEDATO ASIG;
-
-//Nivel 5
-DEFINICIONES ::= DECLA | ASIG;
-
->>>>>>> d13d5d0922dbfcce04d1ac8bb5d57fca5ca10b93
 //Nivel 6
 
 COMPONENTES ::= DEFINICIONES | ESTRUCTURAS;
 
-<<<<<<< HEAD
 ESTRUCTURAS ::= RIF | RFOR | RFORIF;
 
 CUERPO ::= I_LLAVE COMPONENTES MAS_CUERPO D_LLAVE;
 
 MAS_CUERPO ::= COMPONENTES MAS_CUERPO | /* empty */;
-=======
-ESTRUCTURAS ::= RIF|RFOR|RFORIF;
-
-CUERPO ::= I_LLAVE COMPONENTES MAS_CUERPO D_LLAVE;
-
-MAS_CUERPO ::= COMPONENTES | /* empty */;
->>>>>>> d13d5d0922dbfcce04d1ac8bb5d57fca5ca10b93
 
 RIF ::= IF COND CUERPO VIENE_ELSE;
 
@@ -181,21 +155,5 @@ VIENE_ELSE ::= ELSE CUERPO | /* empty */;
 RFUN ::= FUN IDENTIFICADOR I_PAR PARAMETROS D_PAR RETORNO TIPODEDATO CUERPO;
 
 RFOR ::= FOR RANGO IDENTIFICADOR INCEXP CUERPO;
-<<<<<<< HEAD
-=======
-
-RFORIFR ::= FORIF COND CUERPO;
-
-
-//Rfun ::= FUNCIONES IDENTIFICADOR
-
-// RFOR ::=
-
-// RFORIF ::=
-
-//CUERPO ::=
-
-
->>>>>>> d13d5d0922dbfcce04d1ac8bb5d57fca5ca10b93
 
 RFORIF ::= FORIF COND CUERPO;

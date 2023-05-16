@@ -50,6 +50,7 @@
                 <outputDirectory>src/main/java</outputDirectory>
 		<lexDefinitions>
 			<lexDefinition>src/main/jflex/itcm</lexDefinition>
+			<lexDefinition>src/main/jflex</lexDefinition>
 		</lexDefinitions>
 	    </configuration>
           </execution>
@@ -68,8 +69,8 @@
       </executions>
       <configuration>
         <cupDefinition>src/main/jflex/itcm</cupDefinition>
-        <outputDirectory>src/main/java</outputDirectory>
-        <className>Sintactico</className>
+        <outputDirectory>src/main/java/</outputDirectory>
+        <className>Syntax</className>
         <symbolsName>syn</symbolsName>
       </configuration>
     </plugin>

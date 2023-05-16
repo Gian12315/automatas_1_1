@@ -15,7 +15,7 @@ public enum Tokens {
      Llave_izquierda,
      Llave_derecha,
      Parentesis_izquierdo,
-     Parentesis_derecha,
+     Parentesis_derecho,
      Coma,
      Multiplicacion,
      Potencia,

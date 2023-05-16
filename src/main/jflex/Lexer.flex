@@ -50,7 +50,7 @@ text = \".+\"
 "..." {name=yytext(); line=yyline;return Concatenacion;}
 
 // Operadores Rango
-".." {name=yytext(); line=yyline;return Rago_exclusivo;}
+".." {name=yytext(); line=yyline;return Rango_exclusivo;}
 "..=" {name=yytext(); line=yyline;return Rango_inclusivo;}
 
 // Operadores Incremento
