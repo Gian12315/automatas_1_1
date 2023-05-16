@@ -2,6 +2,19 @@ package itcm;
 import java_cup.runtime.*;
 
 
+parser code
+{:
+    private Symbol s;
+
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+    }
+:};
+
 // Terminales
 terminal P_COMA,I_LLAVE,D_LLAVE,I_PAR,D_PAR,COMA;//Delimitadores
 terminal MUL;

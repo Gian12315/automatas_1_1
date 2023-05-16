@@ -43,7 +43,9 @@ public class FrmMain extends javax.swing.JFrame {
         txtInput = new javax.swing.JTextArea();
         btnAnalyze = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        txtResult = new javax.swing.JTextPane();
+        txtLexResult = new javax.swing.JTextPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtSyntaxResult = new javax.swing.JTextPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -62,9 +64,13 @@ public class FrmMain extends javax.swing.JFrame {
             }
         });
 
-        txtResult.setEditable(false);
-        txtResult.setContentType("text/html"); // NOI18N
-        jScrollPane3.setViewportView(txtResult);
+        txtLexResult.setEditable(false);
+        txtLexResult.setContentType("text/html"); // NOI18N
+        jScrollPane3.setViewportView(txtLexResult);
+
+        txtSyntaxResult.setEditable(false);
+        txtSyntaxResult.setContentType("text/html"); // NOI18N
+        jScrollPane4.setViewportView(txtSyntaxResult);
 
         jMenu1.setText("File");
 
@@ -88,22 +94,25 @@ public class FrmMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAnalyze, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                    .addComponent(btnAnalyze, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(btnAnalyze)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                     .addComponent(jScrollPane3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAnalyze, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -167,15 +176,16 @@ public class FrmMain extends javax.swing.JFrame {
         Lexer lexer = new Lexer(reader);
         StringBuilder result = new StringBuilder();
         int previousLine = 0;
+        
 
         // Este ciclo infinito analiza el fichero de input que se le pasa a clase Lexer.java
         // Concatena al text area de del JPanel lo que va identificando
-        while (true) {
+        /*while (true) {
             Tokens tokens = lexer.yylex();
             if (tokens == null) {
                 result.append("<p><strong>END</strong></p>");
-                txtResult.setText(result.toString());
-                return;
+                txtLexResult.setText(result.toString());
+                break;
             }
 
             if (lexer.line != previousLine) {
@@ -202,6 +212,24 @@ public class FrmMain extends javax.swing.JFrame {
                         append(" \n");
             }
             previousLine = lexer.line;
+        }*/
+        
+        String syntaxResult = syntaxAnalyze(lexer);
+        txtSyntaxResult.setText(syntaxResult);
+        
+    }
+    
+    private String syntaxAnalyze(Lexer lexer) {
+        Sintactico s = new Sintactico(lexer);
+        String result = "";
+        try{
+            s.parse();
+            result = "Piola";
+            return result;
+        }catch(Exception e) {
+            e.printStackTrace();
+            result = "ERROR DE SINTÁXIS WN!";
+            return result;
         }
     }
 
@@ -247,7 +275,9 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea txtInput;
-    private javax.swing.JTextPane txtResult;
+    private javax.swing.JTextPane txtLexResult;
+    private javax.swing.JTextPane txtSyntaxResult;
     // End of variables declaration//GEN-END:variables
 }

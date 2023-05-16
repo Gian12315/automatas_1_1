@@ -235,6 +235,18 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   public int error_sym() {return 1;}
 
 
+
+    private Symbol s;
+
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+    }
+
+
 /** Cup generated class to encapsulate user supplied action code.*/
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 class CUP$Sintactico$actions {
