@@ -173,14 +173,15 @@ public class FrmMain extends javax.swing.JFrame {
     private void readFile() throws IOException {
 
         Reader reader = new BufferedReader(new FileReader("input.txt"));
-        LexerCup lexer = new LexerCup(reader);
+        LexerCup cupLexer = new LexerCup(reader);
+        Lexer lexer = new Lexer(reader);
         StringBuilder result = new StringBuilder();
         int previousLine = 0;
         
 
         // Este ciclo infinito analiza el fichero de input que se le pasa a clase Lexer.java
         // Concatena al text area de del JPanel lo que va identificando
-        /*while (true) {
+        while (true) {
             Tokens tokens = lexer.yylex();
             if (tokens == null) {
                 result.append("<p><strong>END</strong></p>");
@@ -198,7 +199,7 @@ public class FrmMain extends javax.swing.JFrame {
                         append("\n");
             }
 
-            if (tokens == Tokens.ERROR) {
+            if (tokens == Tokens.Error) {
                 result.append("<p><span color='red'>").
                         append(lexer.name).
                         append("</span> - ").
@@ -212,9 +213,9 @@ public class FrmMain extends javax.swing.JFrame {
                         append(" \n");
             }
             previousLine = lexer.line;
-        }*/
+        }
         
-        String syntaxResult = syntaxAnalyze(lexer);
+        String syntaxResult = syntaxAnalyze(cupLexer);
         txtSyntaxResult.setText(syntaxResult);
         
     }
@@ -228,6 +229,8 @@ public class FrmMain extends javax.swing.JFrame {
             return result;
         }catch(Exception e) {
             e.printStackTrace();
+            String tmp = "Symbol: " + s.getS() + " Line: " + s.getS().left + " Column: " + s.getS().right;
+            System.out.println(tmp);
             result = "ERROR DE SINTÁXIS WN!";
             return result;
         }
