@@ -8,6 +8,8 @@ import java.io.FileInputStream;
  */
 
 import java.io.FileReader;
+import java.io.StringReader;
+
 import java_cup.runtime.Symbol;
 
 public class App {
@@ -21,7 +23,8 @@ public class App {
 
                 Sintactico pars;
                 try {
-                        pars = new Sintactico(new Lexer(new FileReader("test.txt")));
+                    String path = System.getProperty("user.dir") + "\\src\\main\\java\\itcm\\test.txt";
+                    FileReader fileReader = new FileReader(path);
 
                         Symbol s;
                         do {
