@@ -172,12 +172,36 @@ public class FrmMain extends javax.swing.JFrame {
 
     private void readFile() throws IOException {
 
-        Reader reader = new BufferedReader(new FileReader("input.txt"));
-        LexerCup cupLexer = new LexerCup(reader);
-        Lexer lexer = new Lexer(reader);
+        FileReader lexicalReader = new FileReader("input.txt");
+        FileReader parserReader = new FileReader("input.txt");
+
+        LexerCup lexerCup = new LexerCup(parserReader);
+        Lexer lexer = new Lexer(lexicalReader);
+
+        lexicalParse(lexer);
+        parse(lexerCup);
+    }
+    
+    private void parse(LexerCup lexerCup) {
+        Syntax s = new Syntax(lexerCup);
+        StringBuilder result = new StringBuilder();
+        try{
+            s.parse();
+            result.append("<h2 style='color: green;'>Análisis realizado correctamente!</h2>");
+            txtSyntaxResult.setText(result.toString());
+        }catch(Exception e) {
+            // TODO: Fix the error tracking, e.g when it's a syntax error for a semicolon or any character at the last
+            // TODO: of the line the parsers marks the error in the next linea instead of the actual line.
+            // TODO: The parsers makrs -1 when detecs a syntax error in the last line or at the start of the first line
+            e.printStackTrace();
+            result.append("<h2 style='color: red';>Error de sintáxis en línea: ").append(s.getS().left).append(" </h2>");
+            txtSyntaxResult.setText(result.toString());
+        }
+    }
+
+    private void lexicalParse(Lexer lexer) throws IOException {
         StringBuilder result = new StringBuilder();
         int previousLine = 0;
-        
 
         // Este ciclo infinito analiza el fichero de input que se le pasa a clase Lexer.java
         // Concatena al text area de del JPanel lo que va identificando
@@ -213,26 +237,6 @@ public class FrmMain extends javax.swing.JFrame {
                         append(" \n");
             }
             previousLine = lexer.line;
-        }
-        
-        String syntaxResult = syntaxAnalyze(cupLexer);
-        txtSyntaxResult.setText(syntaxResult);
-        
-    }
-    
-    private String syntaxAnalyze(LexerCup lexer) {
-        Syntax s = new Syntax(lexer);
-        String result = "";
-        try{
-            s.parse();
-            result = "Piola";
-            return result;
-        }catch(Exception e) {
-            e.printStackTrace();
-            String tmp = "Symbol: " + s.getS() + " Line: " + s.getS().left + " Column: " + s.getS().right;
-            System.out.println(tmp);
-            result = "ERROR DE SINTÁXIS WN!";
-            return result;
         }
     }
 
