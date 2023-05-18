@@ -236,6 +236,9 @@ public class Syntax extends java_cup.runtime.lr_parser {
 
 
 
+
+    public TablaSimbolos tabla = new TablaSimbolos(); 
+
     private Symbol s;
 
     public void syntax_error(Symbol s){
@@ -298,7 +301,7 @@ class CUP$Syntax$actions {
           case 2: // ID_NUM ::= NUMERO 
             {
               Object RESULT =null;
-		 System.out.println("PLATANO A 30.90 EN CHIAPAS"); 
+
               CUP$Syntax$result = parser.getSymbolFactory().newSymbol("ID_NUM",9, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
           return CUP$Syntax$result;
@@ -496,7 +499,7 @@ class CUP$Syntax$actions {
           case 24: // EXPR_BOOL ::= ARIT OPERADOR_RELACIONAL ARIT 
             {
               Object RESULT =null;
-		 System.out.println("CHINGA TU MADRE OAXACA"); 
+
               CUP$Syntax$result = parser.getSymbolFactory().newSymbol("EXPR_BOOL",8, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-2)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
           return CUP$Syntax$result;
@@ -592,7 +595,10 @@ class CUP$Syntax$actions {
           case 34: // ASIG ::= IDENTIFICADOR IGUAL VALOR P_COMA 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-3)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-3)).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$Syntax$stack.elementAt(CUP$Syntax$top-3)).value;
+		RESULT=a;
               CUP$Syntax$result = parser.getSymbolFactory().newSymbol("ASIG",1, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-3)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
           return CUP$Syntax$result;
@@ -637,7 +643,13 @@ class CUP$Syntax$actions {
           case 39: // DECLA ::= TIPODEDATO ASIG 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()).right;
+		Object b = (Object)((java_cup.runtime.Symbol) CUP$Syntax$stack.peek()).value;
+		 System.out.println((String) a); tabla.añadirSimbolo(new Simbolo((String) a, (String) b, "0")); 
               CUP$Syntax$result = parser.getSymbolFactory().newSymbol("DECLA",5, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
           return CUP$Syntax$result;

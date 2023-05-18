@@ -1,8 +1,12 @@
 package itcm;
 import java_cup.runtime.*;
 
+
 parser code
 {:
+
+    public TablaSimbolos tabla = new TablaSimbolos(); 
+
     private Symbol s;
 
     public void syntax_error(Symbol s){
@@ -123,7 +127,7 @@ RPRINT ::= PRINT I_PAR VALOR:a D_PAR P_COMA;
 
 RRETURN ::= RETURN VALOR:a P_COMA;
 
-ASIG ::= IDENTIFICADOR IGUAL VALOR P_COMA;
+ASIG ::= IDENTIFICADOR:a IGUAL VALOR P_COMA {:RESULT=a;:};
 
 PARAMETROS ::= MAS_TIPOID TIPOID;
 
@@ -133,7 +137,7 @@ COND ::= EXPR_BOOL MAS_COND {: System.out.println("TIlin"); :};
 
 
 //Nivel 4
-DECLA ::= TIPODEDATO ASIG;
+DECLA ::= TIPODEDATO:a ASIG:b {: System.out.println((String) a); tabla.añadirSimbolo(new Simbolo((String) a, (String) b, "0")); :};
 
 //Nivel 5
 DEFINICIONES ::= DECLA | ASIG | RPRINT | RRETURN;

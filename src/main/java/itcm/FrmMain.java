@@ -127,6 +127,9 @@ public class FrmMain extends javax.swing.JFrame {
         writeFile();
         try {
             readFile();
+            
+            
+            
         } catch (IOException ex) {
             Logger.getLogger(FrmMain.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -180,6 +183,7 @@ public class FrmMain extends javax.swing.JFrame {
 
         lexicalParse(lexer);
         parse(lexerCup);
+        
     }
     
     private void parse(LexerCup lexerCup) {
@@ -189,6 +193,10 @@ public class FrmMain extends javax.swing.JFrame {
             s.parse();
             result.append("<h2 style='color: green;'>Análisis realizado correctamente!</h2>");
             txtSyntaxResult.setText(result.toString());
+            
+            
+            showSymbolTable(s.tabla);
+            
         }catch(Exception e) {
             // TODO: Fix the error tracking, e.g when it's a syntax error for a semicolon or any character at the last
             // TODO: of the line the parsers marks the error in the next linea instead of the actual line.
@@ -242,6 +250,12 @@ public class FrmMain extends javax.swing.JFrame {
             }
             previousLine = lexer.line;
         }
+    }
+    
+    private void showSymbolTable(TablaSimbolos tabla) {
+        FrmSymbols formSimbolos = new FrmSymbols(tabla);
+        
+        formSimbolos.setVisible(true);
     }
 
     /**
