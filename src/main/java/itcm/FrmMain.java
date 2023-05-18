@@ -194,7 +194,11 @@ public class FrmMain extends javax.swing.JFrame {
             // TODO: of the line the parsers marks the error in the next linea instead of the actual line.
             // TODO: The parsers makrs -1 when detecs a syntax error in the last line or at the start of the first line
             e.printStackTrace();
-            result.append("<h2 style='color: red';>Error de sintáxis en línea: ").append(s.getS().left).append(" </h2>");
+            result.append("<h2 style='color: red';>Error de sintáxis en línea: ")
+                    .append(s.getS().left)
+                    .append(" Columna: ")
+                    .append(s.getS().right + 1)
+                    .append(" </h2>");
             txtSyntaxResult.setText(result.toString());
         }
     }
