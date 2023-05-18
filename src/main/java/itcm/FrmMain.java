@@ -43,7 +43,9 @@ public class FrmMain extends javax.swing.JFrame {
         txtInput = new javax.swing.JTextArea();
         btnAnalyze = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        txtResult = new javax.swing.JTextPane();
+        txtLexResult = new javax.swing.JTextPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtSyntaxResult = new javax.swing.JTextPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -62,9 +64,13 @@ public class FrmMain extends javax.swing.JFrame {
             }
         });
 
-        txtResult.setEditable(false);
-        txtResult.setContentType("text/html"); // NOI18N
-        jScrollPane3.setViewportView(txtResult);
+        txtLexResult.setEditable(false);
+        txtLexResult.setContentType("text/html"); // NOI18N
+        jScrollPane3.setViewportView(txtLexResult);
+
+        txtSyntaxResult.setEditable(false);
+        txtSyntaxResult.setContentType("text/html"); // NOI18N
+        jScrollPane4.setViewportView(txtSyntaxResult);
 
         jMenu1.setText("File");
 
@@ -88,22 +94,25 @@ public class FrmMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAnalyze, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                    .addComponent(btnAnalyze, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(btnAnalyze)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
                     .addComponent(jScrollPane3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAnalyze, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -163,8 +172,38 @@ public class FrmMain extends javax.swing.JFrame {
 
     private void readFile() throws IOException {
 
-        Reader reader = new BufferedReader(new FileReader("input.txt"));
-        Lexer lexer = new Lexer(reader);
+        FileReader lexicalReader = new FileReader("input.txt");
+        FileReader parserReader = new FileReader("input.txt");
+
+        LexerCup lexerCup = new LexerCup(parserReader);
+        Lexer lexer = new Lexer(lexicalReader);
+
+        lexicalParse(lexer);
+        parse(lexerCup);
+    }
+    
+    private void parse(LexerCup lexerCup) {
+        Syntax s = new Syntax(lexerCup);
+        StringBuilder result = new StringBuilder();
+        try{
+            s.parse();
+            result.append("<h2 style='color: green;'>Análisis realizado correctamente!</h2>");
+            txtSyntaxResult.setText(result.toString());
+        }catch(Exception e) {
+            // TODO: Fix the error tracking, e.g when it's a syntax error for a semicolon or any character at the last
+            // TODO: of the line the parsers marks the error in the next linea instead of the actual line.
+            // TODO: The parsers makrs -1 when detecs a syntax error in the last line or at the start of the first line
+            e.printStackTrace();
+            result.append("<h2 style='color: red';>Error de sintáxis en línea: ")
+                    .append(s.getS().left)
+                    .append(" Columna: ")
+                    .append(s.getS().right + 1)
+                    .append(" </h2>");
+            txtSyntaxResult.setText(result.toString());
+        }
+    }
+
+    private void lexicalParse(Lexer lexer) throws IOException {
         StringBuilder result = new StringBuilder();
         int previousLine = 0;
 
@@ -174,8 +213,8 @@ public class FrmMain extends javax.swing.JFrame {
             Tokens tokens = lexer.yylex();
             if (tokens == null) {
                 result.append("<p><strong>END</strong></p>");
-                txtResult.setText(result.toString());
-                return;
+                txtLexResult.setText(result.toString());
+                break;
             }
 
             if (lexer.line != previousLine) {
@@ -188,7 +227,7 @@ public class FrmMain extends javax.swing.JFrame {
                         append("\n");
             }
 
-            if (tokens == Tokens.ERROR) {
+            if (tokens == Tokens.Error) {
                 result.append("<p><span color='red'>").
                         append(lexer.name).
                         append("</span> - ").
@@ -247,7 +286,9 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea txtInput;
-    private javax.swing.JTextPane txtResult;
+    private javax.swing.JTextPane txtLexResult;
+    private javax.swing.JTextPane txtSyntaxResult;
     // End of variables declaration//GEN-END:variables
 }

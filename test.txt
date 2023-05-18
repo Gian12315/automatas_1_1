@@ -1,5 +1,5 @@
 fun main(string args) -> int {
-     int a = 30;
+    int a = 30;
     double b = "hola";
 
     if a > b {

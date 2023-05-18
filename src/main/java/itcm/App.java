@@ -8,6 +8,8 @@ import java.io.FileInputStream;
  */
 
 import java.io.FileReader;
+import java.io.StringReader;
+
 import java_cup.runtime.Symbol;
 
 public class App {
@@ -19,19 +21,27 @@ public class App {
 
                 System.out.println(tbl);
 
-                Sintactico pars;
+                FileReader fileReader = null;
                 try {
-                        pars = new Sintactico(new Lexer(new FileReader("test.txt")));
+                       fileReader = new FileReader("test.txt");
+                }catch (Exception e) {
+                        System.out.println("Error at reading the input");
+                        e.printStackTrace();
+                }
 
-                        Symbol s;
-                        do {
-                                s = pars.parse();
-                                System.out.println(s.sym);
-                                System.out.println(s.value);
-                        } while (s.value != null);
-
+                Syntax pars = new Syntax(new LexerCup(fileReader));
+                try {
+                        pars.parse();
                 } catch (Exception e) {
+                        Symbol s = pars.getS();
                         System.out.println("Error " + e.getMessage());
+                        int row = s.right;
+                        int col = s.left;
+                        Object value = s.value;
+
+                        System.out.println("Línea: " + row);
+                        System.out.println("Columna: " + col);
+                        System.out.println("Valor: " + value);
                         e.printStackTrace();
                 }
 

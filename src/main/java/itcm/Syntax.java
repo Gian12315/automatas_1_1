@@ -11,7 +11,7 @@ import java_cup.runtime.XMLElement;
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */
 @SuppressWarnings({"rawtypes"})
-public class Sintactico extends java_cup.runtime.lr_parser {
+public class Syntax extends java_cup.runtime.lr_parser {
 
  public final Class getSymbolContainer() {
     return syn.class;
@@ -19,14 +19,14 @@ public class Sintactico extends java_cup.runtime.lr_parser {
 
   /** Default constructor. */
   @Deprecated
-  public Sintactico() {super();}
+  public Syntax() {super();}
 
   /** Constructor which sets the default scanner. */
   @Deprecated
-  public Sintactico(java_cup.runtime.Scanner s) {super(s);}
+  public Syntax(java_cup.runtime.Scanner s) {super(s);}
 
   /** Constructor which sets the default scanner. */
-  public Sintactico(java_cup.runtime.Scanner s, java_cup.runtime.SymbolFactory sf) {super(s,sf);}
+  public Syntax(java_cup.runtime.Scanner s, java_cup.runtime.SymbolFactory sf) {super(s,sf);}
 
   /** Production table. */
   protected static final short _production_table[][] = 
@@ -203,12 +203,12 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   public short[][] reduce_table() {return _reduce_table;}
 
   /** Instance of action encapsulation class. */
-  protected CUP$Sintactico$actions action_obj;
+  protected CUP$Syntax$actions action_obj;
 
   /** Action encapsulation object initializer. */
   protected void init_actions()
     {
-      action_obj = new CUP$Sintactico$actions(this);
+      action_obj = new CUP$Syntax$actions(this);
     }
 
   /** Invoke a user supplied parse action. */
@@ -220,7 +220,7 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     throws java.lang.Exception
   {
     /* call code in generated class */
-    return action_obj.CUP$Sintactico$do_action(act_num, parser, stack, top);
+    return action_obj.CUP$Syntax$do_action(act_num, parser, stack, top);
   }
 
   /** Indicates start state. */
@@ -235,584 +235,596 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   public int error_sym() {return 1;}
 
 
+
+    private Symbol s;
+
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+    }
+
+
 /** Cup generated class to encapsulate user supplied action code.*/
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
-class CUP$Sintactico$actions {
-  private final Sintactico parser;
+class CUP$Syntax$actions {
+  private final Syntax parser;
 
   /** Constructor */
-  CUP$Sintactico$actions(Sintactico parser) {
+  CUP$Syntax$actions(Syntax parser) {
     this.parser = parser;
   }
 
   /** Method 0 with the actual generated action code for actions 0 to 300. */
-  public final java_cup.runtime.Symbol CUP$Sintactico$do_action_part00000000(
-    int                        CUP$Sintactico$act_num,
-    java_cup.runtime.lr_parser CUP$Sintactico$parser,
-    java.util.Stack            CUP$Sintactico$stack,
-    int                        CUP$Sintactico$top)
+  public final java_cup.runtime.Symbol CUP$Syntax$do_action_part00000000(
+    int                        CUP$Syntax$act_num,
+    java_cup.runtime.lr_parser CUP$Syntax$parser,
+    java.util.Stack            CUP$Syntax$stack,
+    int                        CUP$Syntax$top)
     throws java.lang.Exception
     {
       /* Symbol object for return from actions */
-      java_cup.runtime.Symbol CUP$Sintactico$result;
+      java_cup.runtime.Symbol CUP$Syntax$result;
 
       /* select the action based on the action number */
-      switch (CUP$Sintactico$act_num)
+      switch (CUP$Syntax$act_num)
         {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 0: // $START ::= RFUN EOF 
             {
               Object RESULT =null;
-		int start_valleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
-		int start_valright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
-		Object start_val = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		int start_valleft = ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)).left;
+		int start_valright = ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)).right;
+		Object start_val = (Object)((java_cup.runtime.Symbol) CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)).value;
 		RESULT = start_val;
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("$START",0, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("$START",0, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
           /* ACCEPT */
-          CUP$Sintactico$parser.done_parsing();
-          return CUP$Sintactico$result;
+          CUP$Syntax$parser.done_parsing();
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 1: // ID_NUM ::= IDENTIFICADOR 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("ID_NUM",9, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("ID_NUM",9, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 2: // ID_NUM ::= NUMERO 
             {
               Object RESULT =null;
 		 System.out.println("PLATANO A 30.90 EN CHIAPAS"); 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("ID_NUM",9, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("ID_NUM",9, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 3: // OPERADOR_RELACIONAL ::= MENOR 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OPERADOR_RELACIONAL",17, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("OPERADOR_RELACIONAL",17, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 4: // OPERADOR_RELACIONAL ::= MAYOR 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OPERADOR_RELACIONAL",17, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("OPERADOR_RELACIONAL",17, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 5: // OPERADOR_RELACIONAL ::= MENOR_IGUAL 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OPERADOR_RELACIONAL",17, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("OPERADOR_RELACIONAL",17, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 6: // OPERADOR_RELACIONAL ::= MAYOR_IGUAL 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OPERADOR_RELACIONAL",17, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("OPERADOR_RELACIONAL",17, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 7: // OPERADOR_RELACIONAL ::= IDENTICO 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OPERADOR_RELACIONAL",17, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("OPERADOR_RELACIONAL",17, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 8: // OP_ARIT ::= MUL 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OP_ARIT",20, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("OP_ARIT",20, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 9: // OP_ARIT ::= POW 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OP_ARIT",20, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("OP_ARIT",20, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 10: // OP_ARIT ::= SUM 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OP_ARIT",20, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("OP_ARIT",20, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 11: // OP_ARIT ::= SUB 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OP_ARIT",20, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("OP_ARIT",20, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 12: // OP_ARIT ::= DIV 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OP_ARIT",20, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("OP_ARIT",20, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 13: // OP_ARIT ::= MOD 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OP_ARIT",20, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("OP_ARIT",20, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 14: // OPR_LOGICO ::= AND 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OPR_LOGICO",18, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("OPR_LOGICO",18, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 15: // OPR_LOGICO ::= NOT 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OPR_LOGICO",18, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("OPR_LOGICO",18, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 16: // OPR_LOGICO ::= OR 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OPR_LOGICO",18, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("OPR_LOGICO",18, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 17: // TIPOID ::= TIPODEDATO IDENTIFICADOR 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("TIPOID",28, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("TIPOID",28, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 18: // OPR_RANGO ::= EX_RANGO 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OPR_RANGO",19, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("OPR_RANGO",19, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 19: // OPR_RANGO ::= IN_RANGO 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("OPR_RANGO",19, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("OPR_RANGO",19, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 20: // ARIT ::= ID_NUM OP_ARIT ID_NUM MAS_ARIT 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("ARIT",0, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("ARIT",0, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-3)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 21: // ARIT ::= ID_NUM 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("ARIT",0, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("ARIT",0, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 22: // MAS_ARIT ::= OP_ARIT ID_NUM 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("MAS_ARIT",13, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("MAS_ARIT",13, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 23: // MAS_ARIT ::= 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("MAS_ARIT",13, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("MAS_ARIT",13, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 24: // EXPR_BOOL ::= ARIT OPERADOR_RELACIONAL ARIT 
             {
               Object RESULT =null;
 		 System.out.println("CHINGA TU MADRE OAXACA"); 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("EXPR_BOOL",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("EXPR_BOOL",8, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-2)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 25: // VALOR ::= ARIT 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("VALOR",29, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("VALOR",29, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 26: // VALOR ::= TEXTO 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("VALOR",29, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("VALOR",29, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 27: // MAS_TIPOID ::= COMA TIPOID 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("MAS_TIPOID",16, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("MAS_TIPOID",16, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 28: // MAS_TIPOID ::= 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("MAS_TIPOID",16, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("MAS_TIPOID",16, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 29: // INCEXP ::= ID_NUM 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("INCEXP",10, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("INCEXP",10, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 30: // INCEXP ::= 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("INCEXP",10, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("INCEXP",10, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 31: // RANGO ::= ID_NUM OPR_RANGO ID_NUM 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("RANGO",23, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("RANGO",23, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-2)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 32: // RPRINT ::= PRINT I_PAR VALOR D_PAR P_COMA 
             {
               Object RESULT =null;
-		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
-		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
-		Object a = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-2)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-2)).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$Syntax$stack.elementAt(CUP$Syntax$top-2)).value;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("RPRINT",22, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("RPRINT",22, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-4)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 33: // RRETURN ::= RETURN VALOR P_COMA 
             {
               Object RESULT =null;
-		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
-		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
-		Object a = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)).value;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("RRETURN",11, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("RRETURN",11, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-2)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 34: // ASIG ::= IDENTIFICADOR IGUAL VALOR P_COMA 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("ASIG",1, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("ASIG",1, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-3)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 35: // PARAMETROS ::= MAS_TIPOID TIPOID 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("PARAMETROS",21, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("PARAMETROS",21, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 36: // MAS_COND ::= OPR_LOGICO COND 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("MAS_COND",14, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("MAS_COND",14, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 37: // MAS_COND ::= 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("MAS_COND",14, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("MAS_COND",14, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 38: // COND ::= EXPR_BOOL MAS_COND 
             {
               Object RESULT =null;
 		 System.out.println("TIlin"); 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("COND",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("COND",3, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 39: // DECLA ::= TIPODEDATO ASIG 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("DECLA",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("DECLA",5, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 40: // DEFINICIONES ::= DECLA 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("DEFINICIONES",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("DEFINICIONES",6, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 41: // DEFINICIONES ::= ASIG 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("DEFINICIONES",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("DEFINICIONES",6, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 42: // DEFINICIONES ::= RPRINT 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("DEFINICIONES",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("DEFINICIONES",6, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 43: // DEFINICIONES ::= RRETURN 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("DEFINICIONES",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("DEFINICIONES",6, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 44: // COMPONENTES ::= DEFINICIONES 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("COMPONENTES",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("COMPONENTES",2, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 45: // COMPONENTES ::= ESTRUCTURAS 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("COMPONENTES",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("COMPONENTES",2, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 46: // ESTRUCTURAS ::= RIF 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("ESTRUCTURAS",7, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("ESTRUCTURAS",7, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 47: // ESTRUCTURAS ::= RFOR 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("ESTRUCTURAS",7, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("ESTRUCTURAS",7, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 48: // ESTRUCTURAS ::= RFORIF 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("ESTRUCTURAS",7, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("ESTRUCTURAS",7, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 49: // CUERPO ::= I_LLAVE COMPONENTES MAS_CUERPO D_LLAVE 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("CUERPO",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("CUERPO",4, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-3)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 50: // MAS_CUERPO ::= COMPONENTES MAS_CUERPO 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("MAS_CUERPO",15, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("MAS_CUERPO",15, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 51: // MAS_CUERPO ::= 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("MAS_CUERPO",15, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("MAS_CUERPO",15, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 52: // RIF ::= IF COND CUERPO VIENE_ELSE 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("RIF",27, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("RIF",27, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-3)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 53: // VIENE_ELSE ::= ELSE CUERPO 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("VIENE_ELSE",30, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("VIENE_ELSE",30, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-1)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 54: // VIENE_ELSE ::= 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("VIENE_ELSE",30, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("VIENE_ELSE",30, ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 55: // RFUN ::= FUN IDENTIFICADOR I_PAR PARAMETROS D_PAR RETORNO TIPODEDATO CUERPO 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("RFUN",26, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-7)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("RFUN",26, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-7)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 56: // RFOR ::= FOR RANGO IDENTIFICADOR INCEXP CUERPO 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("RFOR",24, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("RFOR",24, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-4)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 57: // RFORIF ::= FORIF COND CUERPO 
             {
               Object RESULT =null;
 
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("RFORIF",25, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Syntax$result = parser.getSymbolFactory().newSymbol("RFORIF",25, ((java_cup.runtime.Symbol)CUP$Syntax$stack.elementAt(CUP$Syntax$top-2)), ((java_cup.runtime.Symbol)CUP$Syntax$stack.peek()), RESULT);
             }
-          return CUP$Sintactico$result;
+          return CUP$Syntax$result;
 
           /* . . . . . .*/
           default:
             throw new Exception(
-               "Invalid action number "+CUP$Sintactico$act_num+"found in internal parse table");
+               "Invalid action number "+CUP$Syntax$act_num+"found in internal parse table");
 
         }
     } /* end of method */
 
   /** Method splitting the generated action code into several parts. */
-  public final java_cup.runtime.Symbol CUP$Sintactico$do_action(
-    int                        CUP$Sintactico$act_num,
-    java_cup.runtime.lr_parser CUP$Sintactico$parser,
-    java.util.Stack            CUP$Sintactico$stack,
-    int                        CUP$Sintactico$top)
+  public final java_cup.runtime.Symbol CUP$Syntax$do_action(
+    int                        CUP$Syntax$act_num,
+    java_cup.runtime.lr_parser CUP$Syntax$parser,
+    java.util.Stack            CUP$Syntax$stack,
+    int                        CUP$Syntax$top)
     throws java.lang.Exception
     {
-              return CUP$Sintactico$do_action_part00000000(
-                               CUP$Sintactico$act_num,
-                               CUP$Sintactico$parser,
-                               CUP$Sintactico$stack,
-                               CUP$Sintactico$top);
+              return CUP$Syntax$do_action_part00000000(
+                               CUP$Syntax$act_num,
+                               CUP$Syntax$parser,
+                               CUP$Syntax$stack,
+                               CUP$Syntax$top);
     }
 }
 
