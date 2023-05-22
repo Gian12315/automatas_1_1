@@ -82,6 +82,9 @@ non terminal RIF;
 non terminal TIPOID;
 non terminal VALOR;
 non terminal VIENE_ELSE;
+non terminal INC_DEC_OPERATION;
+non terminal INC_DEC;
+non terminal REGULAR_INC_DEC ;
 
 // Precedencias
 //precedence left foo, bar;
@@ -90,6 +93,8 @@ non terminal VIENE_ELSE;
 start with RFUN; // Cambiar esto luego
 
 //Nivel 1
+INC_DEC ::= INC | DEC;
+
 ID_NUM ::= IDENTIFICADOR | NUMERO | DECIMAL;
 
 OPERADOR_RELACIONAL ::= MENOR|MAYOR|MENOR_IGUAL|MAYOR_IGUAL|IDENTICO;
@@ -103,6 +108,8 @@ TIPOID ::= TIPODEDATO IDENTIFICADOR;
 OPR_RANGO ::= EX_RANGO|IN_RANGO;
 
 //Nivel 2
+INC_DEC_OPERATION ::= ID_NUM INC_DEC;
+
 ARIT ::= ID_NUM OP_ARIT ID_NUM MAS_ARIT | ID_NUM;//Expresion aritmetica
 
 MAS_ARIT ::= OP_ARIT ID_NUM | /* empty */;
@@ -119,6 +126,8 @@ RANGO ::= ID_NUM OPR_RANGO ID_NUM;
 
 //Nivel 3
 
+REGULAR_INC_DEC ::= INC_DEC_OPERATION P_COMA;
+
 RPRINT ::= PRINT I_PAR VALOR:a D_PAR P_COMA;
 
 RRETURN ::= RETURN VALOR:a P_COMA;
@@ -129,14 +138,14 @@ PARAMETROS ::= MAS_TIPOID TIPOID;
 
 MAS_COND ::= OPR_LOGICO COND | /* empty */;
 
-COND ::= EXPR_BOOL MAS_COND {: System.out.println("TIlin"); :};
+COND ::= EXPR_BOOL MAS_COND {: System.out.println("Conditional"); :};
 
 
 //Nivel 4
 DECLA ::= TIPODEDATO ASIG;
 
 //Nivel 5
-DEFINICIONES ::= DECLA | ASIG | RPRINT | RRETURN;
+DEFINICIONES ::= DECLA | ASIG | RPRINT | RRETURN | REGULAR_INC_DEC;
 
 //Nivel 6
 
