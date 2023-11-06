@@ -197,7 +197,15 @@ public class FrmMain extends javax.swing.JFrame {
             
             showSymbolTable(s.tabla);
             
-        }catch(Exception e) {
+        } catch (SemanticError e) {
+          e.printStackTrace();
+          result.append("El simbolo: '" + e.symbol.id + "' ya existe.");
+        } catch (InvalidTypes e) {
+          e.printStackTrace();
+          result.append("Se declaro con tipo '" + e.a + "' pero se asigno un tipo '" + e.b +"'");
+        }
+        
+        catch(Exception e) {
             // TODO: Fix the error tracking, e.g when it's a syntax error for a semicolon or any character at the last
             // TODO: of the line the parsers marks the error in the next linea instead of the actual line.
             // TODO: The parsers makrs -1 when detecs a syntax error in the last line or at the start of the first line
@@ -207,6 +215,7 @@ public class FrmMain extends javax.swing.JFrame {
                     .append(" Columna: ")
                     .append(s.getS().right + 1)
                     .append(" </h2>");
+        } finally {
             txtSyntaxResult.setText(result.toString());
         }
     }

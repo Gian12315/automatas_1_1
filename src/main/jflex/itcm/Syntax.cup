@@ -8,6 +8,7 @@ parser code
     public TablaSimbolos tabla = new TablaSimbolos(); 
 
     private Symbol s;
+    private Object var;
 
     public void syntax_error(Symbol s){
         this.s = s;
@@ -15,6 +16,50 @@ parser code
 
     public Symbol getS(){
         return this.s;
+    }
+
+    public TipoDato toTipo(String tipo) {
+        switch (tipo) {
+            case "int":
+                return TipoDato.INT;
+      
+            case "double":
+                return TipoDato.DOUBLE;
+
+            case "string":
+                return TipoDato.STRING;
+
+            case "char":
+                return TipoDato.CHAR;
+
+            case "bool":
+                return TipoDato.BOOL;
+
+            default:                
+                return TipoDato.CLASS;
+        }  
+    }
+    
+    public TipoDato comparaTipos(TipoDato a, TipoDato b) throws InvalidTypes {
+        if(TipoDato.INT == a){
+            switch(b) {
+                case INT:
+                    return TipoDato.INT;
+                case DOUBLE:
+                    return TipoDato.DOUBLE;
+                default:
+                    throw new InvalidTypes("Tipos invalidos", a, b);
+            }
+        } else if (TipoDato.DOUBLE == a) {
+            switch(b) {
+                case INT:
+                case DOUBLE:
+                    return TipoDato.DOUBLE;
+                default:
+                    throw new InvalidTypes("Tipos invalidos", a, b);
+            }
+        }
+        return TipoDato.INT;
     }
 :};
 // Terminales
@@ -99,7 +144,11 @@ start with RFUN; // Cambiar esto luego
 //Nivel 1
 INC_DEC ::= INC | DEC;
 
-ID_NUM ::= IDENTIFICADOR | NUMERO | DECIMAL;
+ID_NUM ::= IDENTIFICADOR:a {: 
+            System.out.println("Buscando: " + (String) a);
+            RESULT = tabla.retornaTipo((String) a); :}
+            | NUMERO:a {: RESULT = TipoDato.INT; :}
+            | DECIMAL:a {: RESULT = TipoDato.DOUBLE; :};
 
 OPERADOR_RELACIONAL ::= MENOR|MAYOR|MENOR_IGUAL|MAYOR_IGUAL|IDENTICO;
 
@@ -114,13 +163,16 @@ OPR_RANGO ::= EX_RANGO|IN_RANGO;
 //Nivel 2
 INC_DEC_OPERATION ::= ID_NUM INC_DEC;
 
-ARIT ::= ID_NUM OP_ARIT ID_NUM MAS_ARIT | ID_NUM;//Expresion aritmetica
+ARIT ::= ID_NUM:a OP_ARIT ID_NUM:b MAS_ARIT {: 
+        RESULT=comparaTipos((TipoDato) a, (TipoDato) b);
+        :}
+        | ID_NUM:a {: RESULT=a; :}  ;//Expresion aritmetica
 
-MAS_ARIT ::= OP_ARIT ID_NUM | /* empty */;
+MAS_ARIT ::= OP_ARIT ID_NUM:a MAS_ARIT | /* empty */;
 
 EXPR_BOOL ::= ARIT OPERADOR_RELACIONAL ARIT;
 
-VALOR ::= ARIT|TEXTO;//Valor asignado
+VALOR ::= ARIT:a {: RESULT=a; :}| TEXTO:a {: RESULT=TipoDato.STRING; :};//Valor asignado
 
 MAS_TIPOID ::= COMA TIPOID | /* empty */;
 
@@ -136,7 +188,7 @@ RPRINT ::= PRINT I_PAR VALOR:a D_PAR P_COMA;
 
 RRETURN ::= RETURN VALOR:a P_COMA;
 
-ASIG ::= IDENTIFICADOR:a IGUAL VALOR P_COMA {:RESULT=a;:};
+ASIG ::= IDENTIFICADOR:v IGUAL VALOR:a P_COMA {:RESULT=a; var=v;:};
 
 PARAMETROS ::= MAS_TIPOID TIPOID;
 
@@ -146,7 +198,24 @@ COND ::= EXPR_BOOL MAS_COND {: System.out.println("Conditional"); :};
 
 
 //Nivel 4
-DECLA ::= TIPODEDATO:a ASIG:b {: System.out.println((String) a); tabla.añadirSimbolo(new Simbolo((String) a, (String) b, "0")); :};
+DECLA ::= TIPODEDATO:a ASIG:b {: 
+    System.out.println("tipo de dato " + a.toString());
+    System.out.println("asigacion tipo " +  b.toString()); 
+    
+    TipoDato tipo = comparaTipos(toTipo((String) a), (TipoDato) b);
+
+    if (toTipo((String) a) != tipo) {
+        throw new InvalidTypes("Declaración invalida: ", toTipo((String) a), tipo);
+    }
+
+    System.out.println("tipo resultante: " + tipo);
+    Simbolo simbolo = new Simbolo(tipo, (String) var, "0");
+    var = null;
+    if (tabla.buscarSimbolo(simbolo.id)) {
+        throw new SemanticError("ya existe we", simbolo);
+    }
+    tabla.añadirSimbolo(simbolo);
+:};
 
 //Nivel 5
 DEFINICIONES ::= DECLA | ASIG | RPRINT | RRETURN | REGULAR_INC_DEC;
