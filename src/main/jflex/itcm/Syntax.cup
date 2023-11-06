@@ -1,0 +1,241 @@
+package itcm;
+import java_cup.runtime.*;
+
+
+parser code
+{:
+
+    public TablaSimbolos tabla = new TablaSimbolos(); 
+
+    private Symbol s;
+    private Object var;
+
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+    }
+
+    public TipoDato toTipo(String tipo) {
+        switch (tipo) {
+            case "int":
+                return TipoDato.INT;
+      
+            case "double":
+                return TipoDato.DOUBLE;
+
+            case "string":
+                return TipoDato.STRING;
+
+            case "char":
+                return TipoDato.CHAR;
+
+            case "bool":
+                return TipoDato.BOOL;
+
+            default:                
+                return TipoDato.CLASS;
+        }  
+    }
+    
+    public TipoDato comparaTipos(TipoDato a, TipoDato b) throws InvalidTypes {
+        if(TipoDato.INT == a){
+            switch(b) {
+                case INT:
+                    return TipoDato.INT;
+                case DOUBLE:
+                    return TipoDato.DOUBLE;
+                default:
+                    throw new InvalidTypes("Tipos invalidos", a, b);
+            }
+        } else if (TipoDato.DOUBLE == a) {
+            switch(b) {
+                case INT:
+                case DOUBLE:
+                    return TipoDato.DOUBLE;
+                default:
+                    throw new InvalidTypes("Tipos invalidos", a, b);
+            }
+        }
+        return TipoDato.INT;
+    }
+:};
+// Terminales
+terminal P_COMA,I_LLAVE,D_LLAVE,I_PAR,D_PAR,COMA;//Delimitadores
+terminal MUL;
+terminal POW;
+terminal SUM;
+terminal SUB;
+terminal DIV;
+terminal MOD;
+terminal CONCAT;
+terminal EX_RANGO;
+terminal IN_RANGO;
+terminal INC;
+terminal DEC;
+terminal AND;
+terminal NOT;
+terminal OR;
+terminal MENOR, MAYOR, MENOR_IGUAL, MAYOR_IGUAL, IDENTICO;
+terminal DIFERENTE;
+terminal RETORNO;
+terminal IGUAL;
+terminal TIPODEDATO;
+terminal FORIF;
+terminal FOR;
+terminal IF;
+terminal FUN;
+terminal RETURN;
+terminal IMPORT;
+terminal INPUT;
+terminal PRINT;
+terminal DECIMAL;
+terminal NUMERO;
+terminal IDENTIFICADOR;
+terminal TEXTO;
+terminal ERROR;
+terminal ELSE;
+
+
+// No terminales
+non terminal ARIT;
+non terminal ASIG;
+non terminal COMPONENTES;
+non terminal COND;
+non terminal CUERPO;
+non terminal DECLA;
+non terminal DEFINICIONES;
+non terminal ESTRUCTURAS;
+non terminal EXPR_BOOL;
+non terminal ID_NUM;
+non terminal INCEXP;
+non terminal RRETURN;
+non terminal MASCOND;
+non terminal MAS_ARIT;
+non terminal MAS_COND;
+non terminal MAS_CUERPO;
+non terminal MAS_TIPOID;
+non terminal OPERADOR_RELACIONAL;
+non terminal OPR_LOGICO;
+non terminal OPR_RANGO;
+non terminal OP_ARIT;
+non terminal PARAMETROS;
+non terminal RPRINT;
+non terminal RANGO;
+non terminal RFOR;
+non terminal RFORIF;
+non terminal RFUN;
+non terminal RIF;
+non terminal TIPOID;
+non terminal VALOR;
+non terminal VIENE_ELSE;
+non terminal INC_DEC_OPERATION;
+non terminal INC_DEC;
+non terminal REGULAR_INC_DEC ;
+
+// Precedencias
+//precedence left foo, bar;
+
+// Gramaticas ó Reglas de producción
+start with RFUN; // Cambiar esto luego
+
+//Nivel 1
+INC_DEC ::= INC | DEC;
+
+ID_NUM ::= IDENTIFICADOR:a {: 
+            System.out.println("Buscando: " + (String) a);
+            RESULT = tabla.retornaTipo((String) a); :}
+            | NUMERO:a {: RESULT = TipoDato.INT; :}
+            | DECIMAL:a {: RESULT = TipoDato.DOUBLE; :};
+
+OPERADOR_RELACIONAL ::= MENOR|MAYOR|MENOR_IGUAL|MAYOR_IGUAL|IDENTICO;
+
+OP_ARIT::= MUL|POW|SUM|SUB|DIV|MOD ;
+
+OPR_LOGICO ::= AND|NOT|OR;
+
+TIPOID ::= TIPODEDATO IDENTIFICADOR;
+
+OPR_RANGO ::= EX_RANGO|IN_RANGO;
+
+//Nivel 2
+INC_DEC_OPERATION ::= ID_NUM INC_DEC;
+
+ARIT ::= ID_NUM:a OP_ARIT ID_NUM:b MAS_ARIT {: 
+        RESULT=comparaTipos((TipoDato) a, (TipoDato) b);
+        :}
+        | ID_NUM:a {: RESULT=a; :}  ;//Expresion aritmetica
+
+MAS_ARIT ::= OP_ARIT ID_NUM:a MAS_ARIT | /* empty */;
+
+EXPR_BOOL ::= ARIT OPERADOR_RELACIONAL ARIT;
+
+VALOR ::= ARIT:a {: RESULT=a; :}| TEXTO:a {: RESULT=TipoDato.STRING; :};//Valor asignado
+
+MAS_TIPOID ::= COMA TIPOID | /* empty */;
+
+INCEXP ::= ID_NUM | /* empty */;
+
+RANGO ::= ID_NUM OPR_RANGO ID_NUM;
+
+//Nivel 3
+
+REGULAR_INC_DEC ::= INC_DEC_OPERATION P_COMA;
+
+RPRINT ::= PRINT I_PAR VALOR:a D_PAR P_COMA;
+
+RRETURN ::= RETURN VALOR:a P_COMA;
+
+ASIG ::= IDENTIFICADOR:v IGUAL VALOR:a P_COMA {:RESULT=a; var=v;:};
+
+PARAMETROS ::= MAS_TIPOID TIPOID;
+
+MAS_COND ::= OPR_LOGICO COND | /* empty */;
+
+COND ::= EXPR_BOOL MAS_COND {: System.out.println("Conditional"); :};
+
+
+//Nivel 4
+DECLA ::= TIPODEDATO:a ASIG:b {: 
+    System.out.println("tipo de dato " + a.toString());
+    System.out.println("asigacion tipo " +  b.toString()); 
+    
+    TipoDato tipo = comparaTipos(toTipo((String) a), (TipoDato) b);
+
+    if (toTipo((String) a) != tipo) {
+        throw new InvalidTypes("Declaración invalida: ", toTipo((String) a), tipo);
+    }
+
+    System.out.println("tipo resultante: " + tipo);
+    Simbolo simbolo = new Simbolo(tipo, (String) var, "0");
+    var = null;
+    if (tabla.buscarSimbolo(simbolo.id)) {
+        throw new SemanticError("ya existe we", simbolo);
+    }
+    tabla.añadirSimbolo(simbolo);
+:};
+
+//Nivel 5
+DEFINICIONES ::= DECLA | ASIG | RPRINT | RRETURN | REGULAR_INC_DEC;
+
+//Nivel 6
+
+COMPONENTES ::= DEFINICIONES | ESTRUCTURAS;
+
+ESTRUCTURAS ::= RIF | RFOR | RFORIF;
+
+CUERPO ::= I_LLAVE COMPONENTES MAS_CUERPO D_LLAVE;
+
+MAS_CUERPO ::= COMPONENTES MAS_CUERPO | /* empty */;
+
+RIF ::= IF COND CUERPO VIENE_ELSE;
+
+VIENE_ELSE ::= ELSE CUERPO | /* empty */;
+
+RFUN ::= FUN IDENTIFICADOR I_PAR PARAMETROS D_PAR RETORNO TIPODEDATO CUERPO;
+
+RFOR ::= FOR RANGO IDENTIFICADOR INCEXP CUERPO;
+
+RFORIF ::= FORIF COND CUERPO;

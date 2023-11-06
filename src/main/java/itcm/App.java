@@ -21,23 +21,27 @@ public class App {
 
                 System.out.println(tbl);
 
-                Sintactico pars;
+                FileReader fileReader = null;
                 try {
-                    String path = System.getProperty("user.dir") + "\\src\\main\\java\\itcm\\test.txt";
-                    FileReader fileReader = new FileReader(path);
+                       fileReader = new FileReader("test.txt");
+                }catch (Exception e) {
+                        System.out.println("Error at reading the input");
+                        e.printStackTrace();
+                }
 
-                    String text = "";
-                    do{
-                        text += (char) fileReader.read();
-                    }
-                    while (fileReader.read() != -1);
-
-                     pars = new Sintactico(new Lexer(fileReader));
-                    //pars = new Sintactico(new Lexer(new StringReader(text)));
-                     pars.parse();
-
-                } catch (Exception e){
+                Syntax pars = new Syntax(new LexerCup(fileReader));
+                try {
+                        pars.parse();
+                } catch (Exception e) {
+                        Symbol s = pars.getS();
                         System.out.println("Error " + e.getMessage());
+                        int row = s.right;
+                        int col = s.left;
+                        Object value = s.value;
+
+                        System.out.println("Línea: " + row);
+                        System.out.println("Columna: " + col);
+                        System.out.println("Valor: " + value);
                         e.printStackTrace();
                 }
 

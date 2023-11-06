@@ -2,23 +2,6 @@ package itcm;
 
 import java.util.HashMap;
 
-import itcm.TipoDato;
-
-/**
- * InnerTablaSimbolos
- */
-class Simbolo {
-    TipoDato tipoDato;
-    String id;
-    String valor;
-
-    public Simbolo(TipoDato tipoDato, String id, String valor) {
-        this.tipoDato = tipoDato;
-        this.id = id;
-        this.valor = valor;
-    }
-}
-
 /**
  * TablaSimbolos
  */
@@ -30,11 +13,37 @@ public class TablaSimbolos {
     }
 
     public void añadirSimbolo(Simbolo simbolo) {
-        tablaSimbolos.put(simbolo.id, simbolo);
+        if (!buscarSimbolo(simbolo.id)) {
+            tablaSimbolos.put(simbolo.id, simbolo);
+        } else {
+            System.err.println("Ya existe el simbolo '" + simbolo.id + "', ha sido ignorado");
+        }
+    }
+    
+    public boolean buscarSimbolo(String id) {
+        return tablaSimbolos.containsKey(id);
+    }
+    
+    public String retornaValor(String identificador) throws SymbolNotFound {
+        if (!buscarSimbolo(identificador)) {
+            throw new SymbolNotFound("Simbolo no encontrado", identificador);
+        }
+        return tablaSimbolos.get(identificador).valor;
+    }
+    
+    public TipoDato retornaTipo(String identificador) throws SymbolNotFound {
+        if (!buscarSimbolo(identificador)) {
+            throw new SymbolNotFound("Simbolo no encontrado", identificador);
+        }
+        return tablaSimbolos.get(identificador).tipoDato;
     }
 
     public void removerSimbolo(String id) {
         tablaSimbolos.remove(id);
+    }
+    
+    public HashMap<String, Simbolo> getInnerMap() {
+        return tablaSimbolos;
     }
 
     public String toString() {
