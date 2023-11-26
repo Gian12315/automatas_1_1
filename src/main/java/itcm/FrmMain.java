@@ -202,7 +202,7 @@ public class FrmMain extends javax.swing.JFrame {
           result.append("El simbolo: '" + e.symbol.id + "' ya existe.");
         } catch (InvalidTypes e) {
           e.printStackTrace();
-          result.append("Se declaro con tipo '" + e.a + "' pero se asigno un tipo '" + e.b +"'");
+          result.append("Imposible operar '" + e.a + "' con un tipo '" + e.b +"'");
         }
         
         catch(Exception e) {
