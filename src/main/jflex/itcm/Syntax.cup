@@ -40,7 +40,7 @@ parser code
         }  
     }
     
-    public TipoDato comparaTipos(TipoDato a, TipoDato b) throws InvalidTypes {
+    public TipoDato comparaTiposSuma(TipoDato a, TipoDato b) throws InvalidTypes {
         if(TipoDato.INT == a){
             switch(b) {
                 case INT:
@@ -53,14 +53,282 @@ parser code
         } else if (TipoDato.DOUBLE == a) {
             switch(b) {
                 case INT:
+                    return TipoDato.DOUBLE;
                 case DOUBLE:
                     return TipoDato.DOUBLE;
                 default:
                     throw new InvalidTypes("Tipos invalidos", a, b);
             }
-        }
+        }else if (TipoDato.STRING == a){
+         switch(b){
+             case STRING:
+                return TipoDato.STRING;
+             default:
+                throw new InvalidTypes("Tipos invalidos",a,b);
+             }
+          }else if(TipoDato.BOOL == a){
+            switch(b){ 
+                case BOOL:
+                  return TipoDato.BOOL;
+                default:
+                  throw new InvalidTypes("Tipos invalidos",a,b);  
+              }
+           }else if(TipoDato.CHAR == a){
+            switch(b){ 
+                case CHAR:
+                  return TipoDato.CHAR;
+                default:
+                  throw new InvalidTypes("Tipos invalidos",a,b);  
+              }
+           }
         return TipoDato.INT;
     }
+
+    public TipoDato comparaTiposMulti(TipoDato a, TipoDato b) throws InvalidTypes {
+        if(TipoDato.INT == a){
+            switch(b) {
+                case INT:
+                    return TipoDato.INT;
+                case DOUBLE:
+                    return TipoDato.DOUBLE;
+                default:
+                    throw new InvalidTypes("Tipos invalidos", a, b);
+            }
+        } else if (TipoDato.DOUBLE == a) {
+            switch(b) {
+                case INT:
+                    return TipoDato.DOUBLE;
+                case DOUBLE:
+                    return TipoDato.DOUBLE;
+                default:
+                    throw new InvalidTypes("Tipos invalidos", a, b);
+            }
+        }else if (TipoDato.STRING == a){
+         switch(b){
+             case STRING:
+                return TipoDato.STRING;
+             default:
+                throw new InvalidTypes("Tipos invalidos",a,b);
+             }
+          }else if(TipoDato.BOOL == a){
+            switch(b){ 
+                case BOOL:
+                  return TipoDato.BOOL;
+                default:
+                  throw new InvalidTypes("Tipos invalidos",a,b);  
+              }
+           }else if(TipoDato.CHAR == a){
+            switch(b){ 
+                case CHAR:
+                  return TipoDato.CHAR;
+                default:
+                  throw new InvalidTypes("Tipos invalidos",a,b);  
+              }
+           }
+        return TipoDato.INT;
+    }
+
+    public TipoDato comparaTiposDiv(TipoDato a, TipoDato b) throws InvalidTypes {
+        if(TipoDato.INT == a){
+            switch(b) {
+                case INT:
+                    return TipoDato.DOUBLE;
+                case DOUBLE:
+                    return TipoDato.DOUBLE;
+                default:
+                    throw new InvalidTypes("Tipos invalidos", a, b);
+            }
+        } else if (TipoDato.DOUBLE == a) {
+            switch(b) {
+                case INT:
+                    return TipoDato.DOUBLE;
+                case DOUBLE:
+                    return TipoDato.DOUBLE;
+                default:
+                    throw new InvalidTypes("Tipos invalidos", a, b);
+            }
+        }else{
+            throw new InvalidTypes("Tipos invalidos", a, b);
+        }
+        
+    }
+
+    public TipoDato comparaTiposPotencia(TipoDato a, TipoDato b) throws InvalidTypes {
+        if(TipoDato.INT == a){
+            switch(b) {
+                case INT:
+                    return TipoDato.INT;
+                case DOUBLE:
+                    return TipoDato.DOUBLE;
+                default:
+                    throw new InvalidTypes("Tipos invalidos", a, b);
+            }
+        } else if (TipoDato.DOUBLE == a) {
+            switch(b) {
+                case INT:
+                    return TipoDato.DOUBLE;
+                case DOUBLE:
+                    return TipoDato.DOUBLE;
+                default:
+                    throw new InvalidTypes("Tipos invalidos", a, b);
+            }
+        }else{
+            throw new InvalidTypes("Tipos invalidos", a, b);
+        }
+        
+    }
+
+    public TipoDato comparaTiposModulo(TipoDato a, TipoDato b) throws InvalidTypes {
+        if(TipoDato.INT == a){
+            switch(b) {
+                case INT:
+                    return TipoDato.INT;
+                case DOUBLE:
+                    return TipoDato.INT;
+                default:
+                    throw new InvalidTypes("Tipos invalidos", a, b);
+            }
+        } else if (TipoDato.DOUBLE == a) {
+            switch(b) {
+                case INT:
+                    return TipoDato.INT;
+                case DOUBLE:
+                    return TipoDato.INT;
+                default:
+                    throw new InvalidTypes("Tipos invalidos", a, b);
+            }
+        }else{
+            throw new InvalidTypes("Tipos invalidos", a, b);
+        }
+        
+    }
+
+    public TipoDato comparaTiposResta(TipoDato a, TipoDato b) throws InvalidTypes {
+        if(TipoDato.INT == a){
+            switch(b) {
+                case INT:
+                    return TipoDato.INT;
+                case DOUBLE:
+                    return TipoDato.DOUBLE;
+                default:
+                    throw new InvalidTypes("Tipos invalidos", a, b);
+            }
+        } else if (TipoDato.DOUBLE == a) {
+            switch(b) {
+                case INT:
+                    return TipoDato.DOUBLE;
+                case DOUBLE:
+                    return TipoDato.DOUBLE;
+                default:
+                    throw new InvalidTypes("Tipos invalidos", a, b);
+            }
+        }else if (TipoDato.STRING == a){
+         switch(b){
+             case STRING:
+                return TipoDato.STRING;
+             default:
+                throw new InvalidTypes("Tipos invalidos",a,b);
+             }
+          }else if(TipoDato.BOOL == a){
+            switch(b){ 
+                case BOOL:
+                  return TipoDato.BOOL;
+                default:
+                  throw new InvalidTypes("Tipos invalidos",a,b);  
+              }
+           }else if(TipoDato.CHAR == a){
+            switch(b){ 
+                case CHAR:
+                  return TipoDato.CHAR;
+                default:
+                  throw new InvalidTypes("Tipos invalidos",a,b);  
+              }
+           }
+        return TipoDato.INT;
+    }
+
+public TipoDato comparaTiposBoolEq(TipoDato a, TipoDato b) throws InvalidTypes {
+        if(TipoDato.INT == a){
+            switch(b) {
+                case INT:
+                case DOUBLE:
+                    return TipoDato.BOOL;              
+                default:
+                    throw new InvalidTypes("Tipos para comparar", a, b);
+            }
+        } else if (TipoDato.DOUBLE == a) {
+            switch(b) {
+                case INT:
+                case DOUBLE:
+                    return TipoDato.BOOL;                               
+                default:
+                    throw new InvalidTypes("Tipos para comparar", a, b);
+            }
+        }else if (TipoDato.STRING == a){
+         switch(b){
+             case STRING:
+             case CHAR:
+                return TipoDato.BOOL;
+             default:
+                throw new InvalidTypes("Tipos para comparar",a,b);
+             }
+          }else if(TipoDato.BOOL == a){
+            switch(b){ 
+                case BOOL:
+                  return TipoDato.BOOL;
+                default:
+                  throw new InvalidTypes("Tipos para comparar",a,b);  
+              }
+           }else if(TipoDato.CHAR == a){
+            switch(b){ 
+                case CHAR:
+                case STRING:
+                  return TipoDato.BOOL;
+                default:
+                  throw new InvalidTypes("Tipos para comparar",a,b);  
+              }
+           }
+        return TipoDato.BOOL;
+    }
+
+public TipoDato comparaTiposBool(TipoDato a, TipoDato b) throws InvalidTypes {
+        if(TipoDato.INT == a){
+            switch(b) {
+                case INT:
+                case DOUBLE:
+                    return TipoDato.BOOL;              
+                default:
+                    throw new InvalidTypes("Tipos para comparar", a, b);
+            }
+        } else if (TipoDato.DOUBLE == a) {
+            switch(b) {
+                case INT:
+                case DOUBLE:
+                    return TipoDato.BOOL;                               
+                default:
+                    throw new InvalidTypes("Tipos para comparar", a, b);
+            }
+        }else if (TipoDato.STRING == a){
+         switch(b){
+             default:
+                throw new InvalidTypes("Tipos para comparar",a,b);
+             }
+          }else if(TipoDato.BOOL == a){
+            switch(b){ 
+                default:
+                  throw new InvalidTypes("Tipos para comparar",a,b);  
+              }
+           }else if(TipoDato.CHAR == a){
+            switch(b){ 
+                default:
+                  throw new InvalidTypes("Tipos para comparar",a,b);  
+              }
+           }
+        return TipoDato.BOOL;
+    }
+
+
+
 :};
 // Terminales
 terminal P_COMA,I_LLAVE,D_LLAVE,I_PAR,D_PAR,COMA;//Delimitadores
@@ -146,13 +414,14 @@ INC_DEC ::= INC | DEC;
 
 ID_NUM ::= IDENTIFICADOR:a {: 
             System.out.println("Buscando: " + (String) a);
+
             RESULT = tabla.retornaTipo((String) a); :}
             | NUMERO:a {: RESULT = TipoDato.INT; :}
             | DECIMAL:a {: RESULT = TipoDato.DOUBLE; :};
 
-OPERADOR_RELACIONAL ::= MENOR|MAYOR|MENOR_IGUAL|MAYOR_IGUAL|IDENTICO;
+OPERADOR_RELACIONAL ::= MENOR {: RESULT="<"; :}|MAYOR {: RESULT=">"; :}|MENOR_IGUAL{: RESULT="<="; :}|MAYOR_IGUAL{: RESULT=">="; :}|IDENTICO{: RESULT="=="; :};
 
-OP_ARIT::= MUL|POW|SUM|SUB|DIV|MOD ;
+OP_ARIT::= MUL {: RESULT="*"; :}|POW{: RESULT="**"; :}|SUM{: RESULT="+"; :}|SUB{: RESULT="-"; :}|DIV{: RESULT="/"; :}|MOD{: RESULT="%"; :} ;
 
 OPR_LOGICO ::= AND|NOT|OR;
 
@@ -163,14 +432,30 @@ OPR_RANGO ::= EX_RANGO|IN_RANGO;
 //Nivel 2
 INC_DEC_OPERATION ::= ID_NUM INC_DEC;
 
-ARIT ::= ID_NUM:a OP_ARIT ID_NUM:b MAS_ARIT {: 
-        RESULT=comparaTipos((TipoDato) a, (TipoDato) b);
+
+ARIT ::= ID_NUM:a OP_ARIT:tipo ID_NUM:b MAS_ARIT {: 
+        if(tipo == "*")
+               RESULT=comparaTiposMulti((TipoDato) a, (TipoDato) b);
+         if(tipo == "/")
+                       RESULT=comparaTiposDiv((TipoDato) a, (TipoDato) b);
+         if(tipo == "^")
+               RESULT=comparaTiposPotencia((TipoDato) a, (TipoDato) b);
+         if(tipo == "%")
+                       RESULT=comparaTiposModulo((TipoDato) a, (TipoDato) b);
+         if(tipo == "+") {
+               RESULT=comparaTiposSuma((TipoDato) a, (TipoDato) b);
+         }if(tipo == "-")
+               RESULT=comparaTiposResta((TipoDato) a, (TipoDato) b);
         :}
+
+
         | ID_NUM:a {: RESULT=a; :}  ;//Expresion aritmetica
+
+
+
 
 MAS_ARIT ::= OP_ARIT ID_NUM:a MAS_ARIT | /* empty */;
 
-EXPR_BOOL ::= ARIT OPERADOR_RELACIONAL ARIT;
 
 VALOR ::= ARIT:a {: RESULT=a; :}| TEXTO:a {: RESULT=TipoDato.STRING; :};//Valor asignado
 
@@ -181,6 +466,16 @@ INCEXP ::= ID_NUM | /* empty */;
 RANGO ::= ID_NUM OPR_RANGO ID_NUM;
 
 //Nivel 3
+
+EXPR_BOOL ::= VALOR:a OPERADOR_RELACIONAL:op VALOR:b {: 
+        System.out.println((String) op);
+        if ((String) op == "==" || (String) op == "!=") {
+            RESULT = comparaTiposBoolEq((TipoDato) a, (TipoDato) b);
+        } else {
+            RESULT = comparaTiposBool((TipoDato) a, (TipoDato) b);
+        }
+        
+:};
 
 REGULAR_INC_DEC ::= INC_DEC_OPERATION P_COMA;
 
@@ -200,9 +495,11 @@ COND ::= EXPR_BOOL MAS_COND {: System.out.println("Conditional"); :};
 //Nivel 4
 DECLA ::= TIPODEDATO:a ASIG:b {: 
     System.out.println("tipo de dato " + a.toString());
+
     System.out.println("asigacion tipo " +  b.toString()); 
     
-    TipoDato tipo = comparaTipos(toTipo((String) a), (TipoDato) b);
+    TipoDato tipo = comparaTiposSuma(toTipo((String) a), (TipoDato) b);
+
 
     if (toTipo((String) a) != tipo) {
         throw new InvalidTypes("Declaración invalida: ", toTipo((String) a), tipo);
