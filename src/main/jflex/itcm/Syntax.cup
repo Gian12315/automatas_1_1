@@ -1,5 +1,6 @@
 package itcm;
 import java_cup.runtime.*;
+import java.util.LinkedList;
 
 
 parser code
@@ -9,6 +10,8 @@ parser code
 
     private Symbol s;
     private Object var;
+    private Object lastType;
+    private LinkedList<Operation> pendingOps = new LinkedList<Operation>();
 
     public void syntax_error(Symbol s){
         this.s = s;
@@ -446,6 +449,23 @@ ARIT ::= ID_NUM:a OP_ARIT:tipo ID_NUM:b MAS_ARIT {:
                RESULT=comparaTiposSuma((TipoDato) a, (TipoDato) b);
          }if(tipo == "-")
                RESULT=comparaTiposResta((TipoDato) a, (TipoDato) b);
+
+        while (!pendingOps.isEmpty()) {
+            Operation pendingOp = pendingOps.pop();
+                System.out.println(pendingOp);
+            if(pendingOp.op == "*")
+               RESULT=comparaTiposMulti((TipoDato) pendingOp.type, (TipoDato) RESULT);
+         if(pendingOp.op == "/")
+                       RESULT=comparaTiposDiv((TipoDato) pendingOp.type, (TipoDato) RESULT);
+         if(pendingOp.op == "^")
+               RESULT=comparaTiposPotencia((TipoDato) pendingOp.type, (TipoDato) RESULT);
+         if(pendingOp.op == "%")
+                       RESULT=comparaTiposModulo((TipoDato) pendingOp.type, (TipoDato) RESULT);
+         if(pendingOp.op == "+") {
+               RESULT=comparaTiposSuma((TipoDato) pendingOp.type, (TipoDato) RESULT);
+         }if(pendingOp.op == "-")
+               RESULT=comparaTiposResta((TipoDato) pendingOp.type, (TipoDato) RESULT);
+        }
         :}
 
 
@@ -454,7 +474,10 @@ ARIT ::= ID_NUM:a OP_ARIT:tipo ID_NUM:b MAS_ARIT {:
 
 
 
-MAS_ARIT ::= OP_ARIT ID_NUM:a MAS_ARIT | /* empty */;
+MAS_ARIT ::= OP_ARIT:tipo ID_NUM:a MAS_ARIT {: 
+
+    pendingOps.add(new Operation(tipo, a));
+:}| /* empty */;
 
 
 VALOR ::= ARIT:a {: RESULT=a; :}| TEXTO:a {: RESULT=TipoDato.STRING; :};//Valor asignado
@@ -483,8 +506,6 @@ RPRINT ::= PRINT I_PAR VALOR:a D_PAR P_COMA;
 
 RRETURN ::= RETURN VALOR:a P_COMA;
 
-ASIG ::= IDENTIFICADOR:v IGUAL VALOR:a P_COMA {:RESULT=a; var=v;:};
-
 PARAMETROS ::= MAS_TIPOID TIPOID;
 
 MAS_COND ::= OPR_LOGICO COND | /* empty */;
@@ -493,7 +514,7 @@ COND ::= EXPR_BOOL MAS_COND {: System.out.println("Conditional"); :};
 
 
 //Nivel 4
-DECLA ::= TIPODEDATO:a ASIG:b {: 
+DECLA ::= TIPODEDATO:a IDENTIFICADOR:v IGUAL VALOR:b P_COMA {: 
     System.out.println("tipo de dato " + a.toString());
 
     System.out.println("asigacion tipo " +  b.toString()); 
@@ -506,12 +527,20 @@ DECLA ::= TIPODEDATO:a ASIG:b {:
     }
 
     System.out.println("tipo resultante: " + tipo);
-    Simbolo simbolo = new Simbolo(tipo, (String) var, "0");
-    var = null;
+    Simbolo simbolo = new Simbolo(tipo, (String) v, "0");
     if (tabla.buscarSimbolo(simbolo.id)) {
         throw new SemanticError("ya existe we", simbolo);
     }
     tabla.añadirSimbolo(simbolo);
+:};
+
+ASIG ::= IDENTIFICADOR:v IGUAL VALOR:a P_COMA {:
+    if (!tabla.buscarSimbolo((String) v)) {
+        throw new SemanticError("watefok no existe we");
+    }
+
+    comparaTiposSuma(tabla.retornaTipo((String) v), (TipoDato) a);
+    RESULT=a;
 :};
 
 //Nivel 5
