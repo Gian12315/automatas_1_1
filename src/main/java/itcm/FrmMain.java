@@ -199,7 +199,12 @@ public class FrmMain extends javax.swing.JFrame {
             
         } catch (SemanticError e) {
           e.printStackTrace();
-          result.append("El simbolo: '" + e.symbol.id + "' ya existe.");
+          if (e.symbol != null) {
+            result.append("El simbolo: '" + e.symbol.id + "' ya existe.");
+          } else {
+            result.append("Asignación a una variable inexistente.");
+          }
+
         } catch (InvalidTypes e) {
           e.printStackTrace();
           result.append("Imposible operar '" + e.a + "' con un tipo '" + e.b +"'");
